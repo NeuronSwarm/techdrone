@@ -1,0 +1,58 @@
+html
+link(rel='stylesheet', href='css/style.css')
+script(src='https://code.jquery.com/jquery-3.2.1.min.js'
+       integrity='sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4='
+       crossorigin='anonymous')
+script(type='text/javascript', src='js/script.js')
+body
+  .content
+    .welcomeText
+      .welcome
+        h1.greet WELCOME
+      .subText
+        .subTexts
+          p.subscribe Subscribe to our newsletter
+          p.soon We are launching soon
+    .form
+      div.sub
+        input.email(type='email')
+        button.button Sub
+    .social
+      .follow
+        p.followUs Or follow us
+      .socialIcons
+        .socialIcon.facebook.brandico-facebook-rect
+        .socialIcon.twitter.brandico-twitter-bird
+        .socialIcon.github.brandico-github
+  div.space
+  div.divider
+    p Serving great clients since 2011
+  #featuredContent
+    ul
+      li
+        .featuredContentTitle
+          .featuredContentTitleName
+            h4 Play Online
+          a.hyperButton(href='/img/Login1.png') Read More
+        .featuredContentThumbnail
+          .post-image
+            img.wp-post-image(title='image title', alt='thumb image', src='/img/Storm.png', style='width:100%; height:272px;', scale='0')
+      li
+        .featuredContentTitle
+          .featuredContentTitleName
+            h4 User Authentication
+          a.hyperButton(href='http://www.projectautomata.com/2017/07/19/big-announcement-partnership-acquired/') Read More
+        .featuredContentThumbnail
+          .post-image
+            img.wp-post-image(title='image title', alt='thumb image', src='/img/Login1.png', style='width:100%; height:272px;', scale='0')
+      li
+        .featuredContentTitle
+          .featuredContentTitleName
+            h4 Save Your Worlds 
+          a.hyperButton(href='http://www.projectautomata.com/2017/05/31/rise-of-industry-is-finally-here/') Read More
+        .featuredContentThumbnail
+          .post-image
+            img.wp-post-image(title='image title', alt='thumb image', src='/img/NodeWorldUI.png', style='width:100%; height:272px;', scale='0')
+  div.divider
+  #contentPanel
+    img#galaxy(title='image title', alt='thumb image', src='/img/Galaxy.png', style='width:100%;', scale='0')

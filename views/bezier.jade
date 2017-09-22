@@ -1,0 +1,89 @@
+html
+  body
+    canvas#canvas
+    script.
+      var canvas = document.getElementById('canvas');
+      canvas.width = window.innerWidth
+      canvas.height = window.innerHeight
+      var ctx = canvas.getContext ( "2d" );
+      ctx.save ();
+      var radius = 5;
+      var counter = 0;
+      var bezierStartPoint;
+      function Point(x,y){
+        this.x = x || 0;
+        this.y = y || 0;
+      }
+      function Shape(point, radius){
+        this.drawing = true;
+        this.point = point;
+        this.radius = radius;
+        this.draw = function(){
+          ctx.beginPath();
+          ctx.arc(this.point.x, this.point.y, this.radius, 0, Math.PI*2);
+          ctx.fillStyle = 'tomato';
+          ctx.fill()
+          ctx.closePath();
+        }
+      }
+      myShapes = [];
+      Clear = function(){
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+      }
+
+      var controller = function(e){
+        if(counter%2 == 0)
+          startPoint(e);
+        else
+          endPoint(e);
+        counter++;
+      }
+
+      var bezierDraw = function(e){
+        // Tracking of Start Point, cp1, cp2, End Point
+        // Start Point == cp1
+        start = new Point(myShapes[0].point.x, myShapes[0].point.y)
+        end = new Point(myShapes[1].point.x, myShapes[1].point.y)
+        Clear();
+        ctx.beginPath();
+        ctx.moveTo(start.x, start.y);
+        ctx.bezierCurveTo(start.x, start.y, e.clientX, e.clientY, end.x, end.y);
+        ctx.stroke();
+        ctx.closePath();
+      }
+      var startPoint = function(e){
+        console.log('start')
+        bezierStartPoint = new Point(e.clientX, e.clientY)
+        circle = new Shape(bezierStartPoint, radius)
+        circle.draw();
+        myShapes.push(circle);
+        console.log('x: ' + bezierStartPoint.x)
+        console.log('y: ' + bezierStartPoint.y)
+      }
+      var endPoint = function(e){
+        console.log('end')
+        bezierEndPoint = new Point(e.clientX, e.clientY)
+        circle = new Shape(bezierEndPoint, radius)
+        circle.draw();
+        myShapes.push(circle);
+        //- ctx.beginPath();
+        //- ctx.moveTo(bezierStartPoint.x, bezierStartPoint.y);
+        //- ctx.lineTo(e.clientX, e.clientY);
+        //- ctx.strokeStyle = 'tomato';
+        //- ctx.stroke()
+        //- ctx.arc(e.clientX, e.clientY, radius, 0, Math.PI*2);
+        //- ctx.fillStyle = 'tomato';
+        //- ctx.fill()
+        //- ctx.closePath();
+
+        canvas.removeEventListener('mousedown', controller);
+        canvas.addEventListener('mousemove', bezierDraw);
+        canvas.addEventListener('mousedown', stopBezier);
+        console.log('event added')
+      }
+      stopBezier = function(e){
+        canvas.removeEventListener('mousemove', bezierDraw);
+      }
+
+
+      canvas.addEventListener('mousedown', controller);

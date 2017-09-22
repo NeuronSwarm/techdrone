@@ -1,0 +1,1221 @@
+@import url(http://weloveiconfonts.com/api/?family=brandico);
+@import url(https://fonts.googleapis.com/css?family=Junge);
+*{
+  margin:0;
+  padding:0;
+
+
+}
+html,body{width:100%;height:100%;}
+
+body{         background:url('http://farm1.staticflickr.com/36/111023917_8de2b23011_o.jpg')no-repeat;
+  background-size:cover;
+  font-family:junge,georgia;
+  text-align:center;
+}
+
+
+.space{
+  height: 100px;
+}
+
+.divider{
+  height: 80px;
+  background: rgb(32, 84, 0);
+}
+.divider p{
+  color: white;
+  text-align: center;
+  font-size: 20px;
+  padding-top: 20px;
+}
+/* brandico */
+[class*="brandico-"]:before {
+  font-family: 'brandico', sans-serif;
+}
+
+
+
+.content{max-width:40%; max-height:50%;margin:100px auto;}
+
+.welcomeText,.form,.social{ width:100%; }
+/*welcome text*/
+.welcome{
+  height:100px;
+  position:relative;
+  border-bottom:1px solid;
+  overflow:hidden;
+}
+
+.greet{
+  width:100%;
+  height:100%;
+  position:absolute;
+  top:100%;
+  font-size:50px;
+  text-align:center;
+  line-height:100px;
+  transition:all .5s;
+}
+/*taglines*/
+.subText{
+  width:100%;
+  height:100px;
+  position:relative;
+  font-size:30px;
+  overflow:hidden;
+}
+.subText p{
+  height:100%;
+  line-height:100px;
+  text-align:center;
+
+}
+.subTexts{
+  width:100%;
+  position:absolute;
+  bottom:100%;
+  text-align:center;
+  overflow:hidden;
+  transition:all .5s;
+}
+/*FORM*/
+.form{
+  width:100%;
+  height:100px;
+  position:relative;
+}
+
+.sub{
+  width:90%;
+  height:50px;
+  margin:auto;
+  opacity:0;
+  border:none;
+  border-radius:50px;
+  background:rgba(0,0,0,.05);
+  box-shadow:inset 0 0 5px rgba(0,0,0,.4),0 0 0px 5px rgba(0,0,0,.1);
+  transition:all .5s;
+  
+
+}
+
+.email{
+  width:70%;
+  height:70%;
+  margin:1% 0;
+  padding-left:10px;
+  background:none;
+  border:none;
+  font-size:20px;
+}
+
+input:focus{outline:none;}
+
+.button{
+  width:20%;
+  height:100%;
+  float:right;
+  border:none;
+  border-radius:0 50px 50px 0;
+  padding-left: 10;
+  background:red;
+  background-color: #49afcd;
+  background-image:linear-gradient(top, #5bc0de, #2f96b4);
+  cursor:pointer;
+  transition:all .5s;
+}
+
+.button:hover{
+  background: #2f96b4;
+  box-shadow:inset 0 1px 5px rgba(0,0,0,.3);
+}
+
+/*footer-follow us*/
+.follow{
+  width:100%;
+  height:100px;
+  position:relative;
+  overflow:hidden;
+}
+.followUs{
+  width:100%;
+  height:100%;
+  position:absolute;
+  bottom:100%;
+  line-height:100px;
+  text-align:center;
+  font-size:40px;
+  transition:all .5s;
+}
+
+.socialIcons{
+  width:100%;
+  height:100px;
+  position:relative;  
+  overflow:hidden;
+}
+
+.socialIcon{
+  width:33.33%;
+  height:100px;
+  float:left;
+  margin-top:100px;
+  font-size:50px;
+  line-height:100px;
+  transition:margin-top .5s,color .5s;
+  cursor:pointer;
+  
+}
+.socialIcon:hover{ color:#49afcd; text-shadow:0 0 20px white;}
+.twitter{ transition-delay:.5s,0; }
+.github{ transition-delay:1s,0; }
+
+@media screen and (max-width:930px){
+  .subTexts p {font-size:20px}
+  .button{font-size:12px}
+
+}
+ 
+@media screen and (max-width:600px){
+  .welcome,.subText,.sub{background:rgba(255,255,255,.3);}
+  .welcome{border-radius:20px 20px 0 0;}
+  .subText{border-radius:0 0 20px 20px;}
+  .sub{border:1px solid;}
+  .greet{font-size:30px}
+  .subTexts p {font-size:16px;}
+  .button{font-size:8px;margin-right:-3%}
+
+}
+
+/* ---------   automata template -------*/
+
+*, blockquote, dd, div, dl, dt, fieldset, form, h1, h2, h3, h4, h5, h6, html,
+input, label, li, ol, p, pre, td, th,ul
+{
+  margin: 0px;
+  padding: 0px;
+}
+
+fieldset, hr, img
+{
+  border: 0px;
+}
+
+body {
+  font-family: 'Open Sans', sans-serif !important;
+}
+
+
+
+/******************************************************************************/
+/********************************* HEADINGS ***********************************/
+/******************************************************************************/
+
+h1, h2, h3, h4, h5, h6 {
+  color: #0A2125;
+  clear: both;
+  font-family: 'Oswald', sans-serif;
+}
+
+h1 {
+  font-size: 43px;
+  line-height: 180%;
+}
+
+h2 {
+  font-size: 32px;
+  line-height: 160%;
+}
+
+h3 {
+  font-size: 20px;
+  line-height: 140%;
+}
+
+h4 {
+  font-size: 16px;
+  line-height: 120%;
+}
+
+h5, h6 {
+  font-size: 13px;
+}
+
+/******************************************************************************/
+/********************************* HYPERLINKS *********************************/
+/******************************************************************************/
+
+a img {
+  border: none;
+}
+
+a, a:visited {
+  color: #C97D0F;
+  text-decoration: none;
+  outline: 0;
+}
+
+a:hover, a:focus {
+  color: #AD6204;
+  text-decoration: none;
+  outline: 0;
+}
+
+.kickstarterSupport {
+  text-decoration: none !important;
+}
+
+/******************************************************************************/
+/******************************** ALIGNMENTS **********************************/
+/******************************************************************************/
+
+.alignLeft {
+  display: inline;
+  float: left;
+  margin: .75em 1.5em .75em 0;
+}
+
+.alignRight {
+  display: inline;
+  float: right;
+  margin: .75em 0 .75em 1.5em;
+}
+
+.alignCenter {
+  display: block;
+  margin: .75em auto;
+  text-align: center;
+}
+
+.aligncenter {
+  display: block;
+  margin: .75em auto;
+  text-align: center;
+}
+
+/******************************************************************************/
+/******************************* PAGE LAYOUTS *********************************/
+/******************************************************************************/
+
+#contentPanel {
+  width: 100%;
+  margin: 0 auto;
+  background-color: #F0E9D4;
+  float: left;
+}
+
+/******************************************************************************/
+/******************************** NAVIGATION **********************************/
+/******************************************************************************/
+
+img#galaxy{
+  height: 800px;
+}
+#navigationPanel {
+    width: 100%;
+    height: 100px;
+    background: #4A4443;
+}
+
+#navigationPanelLogo {
+    width: 117px;
+    height: 67px;
+    float: left;
+    margin: 13px;
+}
+
+#navigationPanelMenu ul li:hover ul.dropdown {
+    display: block;
+    position: absolute;
+    border: 1px #fff;
+    text-decoration: none;
+    z-index: 999
+}
+
+#navigationPanelMenu {
+    float: right;
+    text-transform: uppercase;
+}
+#navigationPanelMenu ul {
+    width: 100%;
+    padding: 0;
+    margin: 0
+}
+#navigationPanelMenu ul li {
+    float: left;
+    padding: 4.5% 25px 0;
+    list-style: none
+}
+
+#navigationPanelMenu ul li a {
+    color: #CFC9B3;
+    font: 22px Oswald, sans-serif;
+    text-decoration: none;
+    text-align: center;
+}
+
+#navigationPanelMenu ul li a:hover {
+    color: #CFC9B3;
+    text-align: center;
+    border-bottom: 1px solid #C97D0F;
+}
+
+#navigationPanelMenu ul.dropdown li {
+    float: none;
+    width: inherit;
+    background-color: #4A4444;
+    border: 1px solid #C97D0F;
+    color: #CFC9B3;
+    padding: 10px;
+    z-index: 999
+}
+#navigationPanelMenu ul.dropdown li:hover {
+    width: inherit;
+    background-color: #625C5C;
+    padding: 10px;
+    z-index: 999;
+    border-bottom: none;
+}
+#navigationPanelMenu ul.dropdown a {
+    display: block;
+    font-weight: 700;
+    z-index: 999;
+    color: #FFF;
+    font: 12px arial, helvetica, verdana, sans-serif;
+    font-weight: bold
+}
+#navigationPanelMenu ul li:hover ul.dropdown {
+    display: block;
+    position: absolute;
+    border: 1px #fff;
+    text-decoration: none;
+    z-index: 999
+}
+
+#navigationPanelMenu ul li ul.dropdown {
+    display: none;
+    margin: 0;
+    position: absolute;
+    width: inherit;
+    z-index: 999
+}
+
+.kickstarterSupport a {
+  outline: 0;
+  border-bottom: 0px;
+}
+
+#footerNavigationPanelMenu {
+    float: left;
+    text-transform: uppercase;
+}
+#footerNavigationPanelMenu ul {
+    width: 100%;
+    padding: 0;
+    margin: 0
+}
+#footerNavigationPanelMenu ul li {
+    float: left;
+    padding: 4.5% 25px 0;
+    list-style: none
+}
+
+#footerNavigationPanelMenu ul li a {
+    color: #CFC9B3;
+    font: 22px Oswald, sans-serif;
+    text-decoration: none;
+    text-align: center;
+}
+
+#footerNavigationPanelMenu ul li a:hover {
+    color: #CFC9B3;
+    text-align: center;
+    border-bottom: 1px solid #C97D0F;
+}
+
+#footerLogo {
+  width: 85px;
+  height: 85px;
+  float: left;
+  background: url("http://www.projectautomata.com/wp-content/themes/Project%20Automata%20WordPress%20Theme%202.0/images/footerLogo.png");
+  background-size: 100%;
+  background-repeat: no-repeat;
+}
+
+
+/******************************************************************************/
+/******************************** HOME PAGE ***********************************/
+/******************************************************************************/
+
+#introductionPanel {
+  width: 100%;
+  height: 550px;
+  background: url("http://www.projectautomata.com/wp-content/themes/Project%20Automata%20WordPress%20Theme%202.0/images/homeBanner.jpg");
+  background-size: 100%;
+  background-repeat: no-repeat;
+}
+
+#panelContainer {
+  width: 1200px;
+  margin: 0 auto;
+}
+
+#introductionPanelTitle {
+  width: 25%;
+  float: left;
+  margin: 100px 0px 0px 150px;
+}
+
+.titleTop {
+  border-top: 3px solid #C97D0F;
+  width: 50%;
+}
+
+#introductionPanelTitle h1 {
+  text-transform: uppercase;
+  font-weight: bold;
+  color: #F1EBD5;
+  font-size: 60px;
+  font-family: 'Oswald', sans-serif;
+}
+
+#mobileNotReady > h1 {
+  text-transform: uppercase;
+  font-weight: bold;
+  color: #000000;
+  font-size: 12px;
+  font-family: 'Oswald', sans-serif;
+  text-align: center;
+}
+
+#mobileNotReady > p {
+  text-transform: uppercase;
+  font-weight: bold;
+  color: #000000;
+  font-size: 10px;
+  font-family: 'Oswald', sans-serif;
+  text-align: center;
+}
+
+#introductionPanelContent {
+  width: 40%;
+  float: right;
+  margin-right: 190px;
+  color: #F0EAD4;
+  margin-top: 145px;
+}
+
+#newsletterRegistration {
+  width: 100%;
+  height: 70px;
+  background: #C97D0F;
+  float: left;
+}
+
+#newsletterRegistration h2 {
+  width:20%;
+  display: inline;
+  font-family: 'Oswald', sans-serif;
+}
+
+#latestBlogPosts {
+  width: 100%;
+  height: 272px;
+  background: #332D2D;
+  float: left;
+}
+
+#gameDescription {
+  width: 100%;
+  height: 950px;
+  background: url("http://www.projectautomata.com/wp-content/themes/Project%20Automata%20WordPress%20Theme%202.0/images/gameDescriptionBackground.jpg");
+  background-size: 100%;
+  font-family: 'Oswald', sans-serif;
+  float: left;
+}
+
+#gameFeatures {
+  width: 100%;
+  height: 370px;
+  background: url("http://www.projectautomata.com/wp-content/themes/Project%20Automata%20WordPress%20Theme%202.0/images/gameFeaturesBackground.jpg");
+  background-size: 100%;
+  background-repeat: no-repeat;
+  text-transform: uppercase;
+  font-family: 'Oswald', sans-serif;
+  float: left;
+}
+
+#featuredContent {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  font-family: 'Oswald', sans-serif;
+}
+
+#featuredContent h1,
+#quoteArea h1
+{font-size: 33px;}
+
+#featuredContent ul {
+    margin: 0;
+    padding: 0
+}
+#featuredContent ul li {
+  max-width: 33%;
+  height: 272px;
+  float: left;
+  list-style: none;
+  position: relative;
+}
+
+#featuredContent ul li:nth-child(2) {
+  border-right: #4A4443 2px solid;
+  border-left: #4A4443 2px solid;
+}
+
+.featuredContentTitle {
+  width: 100%;
+  position: absolute;
+  top: 100px;
+  text-align: center;
+  height: 57px;
+}
+
+.featuredContentTitleName h4
+{
+  font-size: 35px;
+  color: #F1EBD5;
+  text-transform: uppercase;
+  text-shadow: 1px 1px #000000;
+}
+
+.hyperButton
+{
+  background-color: #C97D0F;
+  padding: 7px 30px 7px 30px;
+  color: #F1EBD5 !important;
+  font-family: 'Oswald', sans-serif;
+}
+
+.featuredContentThumbnail img {
+    max-width: 634px;
+}
+#featuredContent article h4 {
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+#gameDescriptionTitle {
+  width: 50%;
+  padding: 140px 140px 50px 140px;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+#gameDescriptionSubText {
+  height: 200px;
+  padding: 40px 0px 0px 140px;
+  font-family: 'Open Sans', sans-serif;
+}
+
+#gameDescriptionFloatingIsland {
+  width: 480px;
+  height: 480px;
+  float: right;
+  background: url("http://www.projectautomata.com/wp-content/themes/Project%20Automata%20WordPress%20Theme%202.0/images/gameDescriptionIsland.png");
+  background-size: 100%;
+  background-repeat: no-repeat;
+  margin: 100px 100px 0px 100px;
+}
+
+#gameDescriptionSection {
+  margin: 0 auto;
+  width: 1050px;
+}
+
+#gameDescription p {
+  font-family: 'Open Sans', sans-serif;
+}
+
+#gameDescriptionSection ul li {
+  display: inline;
+  width: 350px;
+  float: left;
+  list-style: none;
+  text-align: center;
+  padding: 0px 15px 0px 15px;
+}
+
+#gameDescriptionSectionOneImage {
+  width: 85px;
+  height: 85px;
+  background: url("http://www.projectautomata.com/wp-content/themes/Project%20Automata%20WordPress%20Theme%202.0/images/gameDescriptionConstruction.png");
+  background-size: 100%;
+  background-repeat: no-repeat;
+  margin: 0 auto;
+}
+
+#gameDescriptionSectionTwoImage {
+  width: 85px;
+  height: 85px;
+  background: url("http://www.projectautomata.com/wp-content/themes/Project%20Automata%20WordPress%20Theme%202.0/images/gameDescriptionTransport.png");
+  background-size: 100%;
+  background-repeat: no-repeat;
+  margin: 0 auto;
+}
+
+#gameDescriptionSectionThreeImage {
+  width: 85px;
+  height: 85px;
+  background: url("http://www.projectautomata.com/wp-content/themes/Project%20Automata%20WordPress%20Theme%202.0/images/gameDescriptionCommerce.png");
+  background-size: 100%;
+  background-repeat: no-repeat;
+  margin: 0 auto;
+}
+
+#gameFeaturesTitle {
+  float: left;
+  width: 720px;
+  padding: 50px;
+  font-size: 60px;
+  color: #F1EBD5;
+}
+
+#gameFeaturesTitle h1{
+  font-size: 90px;
+}
+
+#gameFeaturesSubText {
+  float: right;
+  width: 470px;
+  color: #F1EBD5;
+  font-family: "Open sans";
+  text-transform: none;
+  padding: 100px 20px 0px 0px;
+}
+
+.featuredContentTitleName {
+  width: 75%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+#videoPlayerContainer {
+  font-family: 'Oswald', sans-serif;
+  font-size: 35px;
+  text-transform: uppercase;
+  padding-top: 30px;
+}
+
+.playVideoButton {
+  width: 50px;
+  height: 50px;
+  background: url("http://www.projectautomata.com/wp-content/themes/Project%20Automata%20WordPress%20Theme%202.0/images/playVideoButton.png");
+  background-size: 100%;
+  background-repeat: no-repeat;
+  padding-top: 40px;
+  float: left;
+}
+
+.closeVideoPlayer {
+  font-size: 35px;
+  float: right;
+  padding-right: 10px;
+}
+
+/******************************************************************************/
+/********************************** POST PAGE *********************************/
+/******************************************************************************/
+
+.postTitleSection {
+  width: 100%;
+  height: 300px;
+}
+
+#leftSide {
+  width: 70%;
+  float: left;
+  padding: 20px;
+}
+
+#rightSide {
+  width: 30%;
+  float: right;
+  background-color: #e7dcbb;
+  padding: 20px;
+  margin-top: 20px;
+}
+
+#sideBar {
+  margin: 10px;
+}
+
+.postTitle {
+  text-transform: uppercase;
+  font-family: 'Oswald', sans-serif;
+  font-size: 52px;
+}
+
+.postAuthor {
+  text-transform: uppercase;
+  font-family: 'Oswald', sans-serif;
+  font-size: 22px;
+  color: #C97D0E;
+  margin-bottom: 40px;
+}
+
+#postContent {
+  min-height: 500px;
+}
+
+#postContent hr {
+  border-top: 2px solid #C97D0F;
+  width: 40%;
+  margin: 30px auto 30px auto;
+}
+
+#postContent > h1 {
+  border-bottom: 2px solid #C97D0F;
+  font-family: 'Oswald', sans-serif;
+  border-width: 50%;
+}
+
+#postContent > h2 {
+  border-bottom: 2px solid #C97D0F;
+  font-family: 'Oswald', sans-serif;
+  border-width: 50%;
+}
+
+#postContent > h3 {
+  border-bottom: 2px solid #C97D0F;
+  font-family: 'Oswald', sans-serif;
+  border-width: 50%;
+}
+
+#postContent > h4 {
+    font-family: 'Oswald', sans-serif;
+}
+
+#postContent > h5 {
+    font-family: 'Oswald', sans-serif;
+}
+
+#postContent > h6 {
+    font-family: 'Oswald', sans-serif;
+}
+
+#postContent ul li {
+  list-style: url("http://www.projectautomata.com/wp-content/themes/Project%20Automata%20WordPress%20Theme%202.0/images/bulletPoint.png");
+  margin-left: 20px;
+}
+
+#postContent ul li:last-child{
+  margin-bottom: 30px;
+}
+
+#postContent ul li ul li:last-child{
+  margin-bottom: 0px;
+}
+
+#postContent ol li{
+  margin-left: 20px;
+}
+
+#postContent ol li:last-child{
+  margin-bottom: 30px;
+}
+
+#postContent ol li ol li:last-child{
+  margin-bottom: 0px;
+}
+
+
+input, button {
+  border: none;
+  letter-spacing: 0.03em;
+  color: #CFC9B3 !important;
+  background-color: #4A4444;
+  box-sizing: border-box;
+  height: 38px;
+  line-height: 33px;
+  padding: 0 25px;
+  display: inline-block;
+  margin: 0;
+  transition: all 0.23s ease-in-out 0s;
+  text-transform: uppercase !important;
+  font-size: 20px;
+  font-family: 'Oswald', sans-serif;
+}
+
+.wp-caption {
+  border: 2px solid #C97D0F;
+  background: #4A4443;
+  padding: 3px;
+  text-align: center;
+  color: #CFC9B3;
+  text-transform: uppercase;
+  font-family: 'Oswald', sans-serif;
+  box-shadow: 2px 2px 7px #888888;
+}
+
+.widget {
+  list-style: none;
+}
+
+.widget ul li{
+  list-style: square;
+  margin-bottom: 20px;
+}
+
+.entry-title {
+  color: #333333;
+}
+
+/******************************************************************************/
+/******************************** STATIC PAGES ********************************/
+/******************************************************************************/
+
+/******************************************************************************/
+/******************************** FEATURES PAGE *******************************/
+/******************************************************************************/
+
+#gameFeaturesTitleSection {
+  width: 100%;
+  height: 680px;
+  background: url("http://www.projectautomata.com/wp-content/themes/Project%20Automata%20WordPress%20Theme%202.0/images/gf-banner.jpg");
+  background-size: 100%;
+  background-repeat: no-repeat;
+  text-transform: uppercase;
+  font-family: 'Oswald', sans-serif;
+  float: left;
+}
+
+#gameFeaturesTitleSection h1 {
+  margin-top: 125px;
+  font-size: 50px;
+  color: #F1EBD5;
+  width: 65%;
+}
+
+#gameFeaturesTitleSection p {
+  margin-top: 25px;
+  font-size: 22px;
+  width: 70%;
+}
+
+#gameFeatures {
+  width: 100%;
+  height: 450px;
+  background: url("http://www.projectautomata.com/wp-content/themes/Project%20Automata%20WordPress%20Theme%202.0/images/gameFeaturesBackground.jpg");
+  background-size: 100%;
+  font-family: 'Oswald', sans-serif;
+  float: left;
+}
+
+.gameFeaturesHeader {
+  width: 100%;
+  height: 200px;
+  float: left;
+  background-color: black;
+}
+
+.gameFeaturesHeader p {
+  float: right;
+
+}
+
+.gameFeatureFloatingImage {
+  width: 200px;
+  height: 200px;
+  float: left;
+  background: url("http://www.projectautomata.com/wp-content/themes/Project%20Automata%20WordPress%20Theme%202.0/images/gameFeaturePicture.png");
+  background-size: 100%;
+  background-repeat: no-repeat;
+  margin: 85px 100px 0px 100px;
+
+}
+
+.gameFeatureList {
+  text-transform: uppercase;
+  font-family: 'Oswald', sans-serif;
+  text-align: center;
+  float: left;
+  width: 100%;
+  padding: 75px 0px 0px 0px;
+}
+
+.gameFeatureList > h1{
+    font-size: 55px;
+}
+
+.gameFeatureList > p {
+  padding-bottom: 50px;
+  width: 65%;
+  margin: 0px auto;
+  font-family: 'Open Sans', sans-serif;
+  text-transform: initial;
+}
+
+#gatherHarvesterIcons {
+  width: 70%;
+  height: 336px;
+  background: url("http://www.projectautomata.com/wp-content/themes/Project%20Automata%20WordPress%20Theme%202.0/images/gf-gatherers-building-icons.png");
+  background-size: 100%;
+  background-repeat: no-repeat;
+  margin: 0 auto;
+}
+
+#gatherHarvesterImages {
+  width: 80%;
+  height: 345px;
+  background: url("http://www.projectautomata.com/wp-content/themes/Project%20Automata%20WordPress%20Theme%202.0/images/gf-gatherers-models.jpg");
+  background-size: 100%;
+  background-repeat: no-repeat;
+  margin: 0 auto;
+}
+
+#gameWorldImage {
+  width: 100%;
+  height: 550px;
+  float: left;
+  background: url("http://www.projectautomata.com/wp-content/themes/Project%20Automata%20WordPress%20Theme%202.0/images/gf-gatherers-screenshot.jpg");
+  background-size: 100%;
+  background-repeat: no-repeat;
+}
+
+#gatherProductionLine {
+  width: 50%;
+  height: 719px;
+  float: left;
+  background: url("http://www.projectautomata.com/wp-content/themes/Project%20Automata%20WordPress%20Theme%202.0/images/gf-production-recipe-diagram.png");
+  background-repeat: no-repeat;
+}
+
+#gatherProductionBrewery {
+  width: 50%;
+  height: 619px;
+  float: right;
+  background: url("http://www.projectautomata.com/wp-content/themes/Project%20Automata%20WordPress%20Theme%202.0/images/gf-production-model.jpg");
+  background-size: 85%;
+  background-repeat: no-repeat;
+}
+
+#gatherProgressBar {
+  width: 100%;
+  height: 100px;
+  background: url("http://www.projectautomata.com/wp-content/themes/Project%20Automata%20WordPress%20Theme%202.0/images/gf-transportation-route.png");
+  background-size: 100%;
+  background-repeat: no-repeat;
+  float: left;
+  margin-top: 50px;
+}
+
+#gatherTransportTruck {
+  width: 40%;
+  height: 420px;
+  background: url("http://www.projectautomata.com/wp-content/themes/Project%20Automata%20WordPress%20Theme%202.0/images/gf-trade-image.jpg");
+  background-size: 100%;
+  background-repeat: no-repeat;
+  float: left;
+  margin-top: 50px;
+}
+
+#gatherTradeRoute {
+  width: 45%;
+  height: 270px;
+  background: url("http://www.projectautomata.com/wp-content/themes/Project%20Automata%20WordPress%20Theme%202.0/images/gf-trade-diagram.png");
+  background-size: 100%;
+  background-repeat: no-repeat;
+  float: right;
+  margin: 50px 50px 0px 0px;
+}
+
+#gameFeaturesTitleHolder {
+  width: 50%;
+  float: right;
+}
+
+
+/******************************************************************************/
+/********************************** MAILCHIMP *********************************/
+/******************************************************************************/
+
+#mc_embed_signup { text-transform: uppercase;}
+#mc_embed_signup form {text-align:center; padding:15px 0 10px 0;}
+.mc-field-group { display: inline-block; } /* positions input field horizontally */
+#mc_embed_signup input.email {font-family:"Open Sans","Helvetica Neue",Arial,Helvetica,Verdana,sans-serif; font-size: 15px; border: 2px solid #F1EBD5; color: #343434; background-color: #C97D0F; box-sizing:border-box; height:38px; padding: 0px 0.4em; display: inline-block; margin: 0px 30px 0px 30px; width:350px; vertical-align:top;}
+#mc_embed_signup label {display:block; font-size:16px; padding-bottom:10px; font-weight:bold;}
+#mc_embed_signup .clear {display: inline-block;} /* positions button horizontally in line with input */
+#mc_embed_signup .button {font-size: 13px;
+border: none;
+letter-spacing: 0.03em;
+color: #fff;
+background-color: #4A4444;
+box-sizing: border-box;
+height: 38px;
+line-height: 33px;
+padding: 0 18px;
+display: inline-block;
+margin: 0;
+transition: all 0.23s ease-in-out 0s;
+width: 125px;
+text-transform: uppercase;
+font-size: 20px;
+font-family: 'Oswald', sans-serif;}
+#mc_embed_signup .button:hover {background-color:#777; cursor:pointer;}
+#mc_embed_signup div#mce-responses {float:left; top:-1.4em; padding:0em .5em 0em .5em; overflow:hidden; width:90%;margin: 0 5%; clear: both;}
+#mc_embed_signup div.response {margin:1em 0; padding:1em .5em .5em 0; font-weight:bold; float:left; top:-1.5em; z-index:1; width:80%;}
+#mc_embed_signup #mce-error-response {display:none;}
+#mc_embed_signup #mce-success-response {color:#529214; display:none;}
+#mc_embed_signup label.error {display:block; float:none; width:auto; margin-left:1.05em; text-align:left; padding:.5em 0;}
+
+/******************************************************************************/
+/************************************ FOOTER **********************************/
+/******************************************************************************/
+
+footer {
+  width: 100%;
+  background: #4A4443;
+  padding: 15px;
+  height: 115px;
+  float: left;
+}
+
+#copyrightNotice {
+  padding-left: 25px;
+  color: #F1EBD5;
+}
+
+#socialMedia {
+  float: right;
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-family: 'Oswald', sans-serif;
+  color: #F1EBD5;
+  padding: 0px 150px 0px 0px;
+  margin: 10px 0px 0px 0px;
+}
+
+#socialMedia p {
+  margin: 0 0 10px;
+  font-size: 17px;
+}
+
+#socialMedia ul li {
+  float: right;
+  display: inline;
+  width: 25px;
+  height: 25px;
+  margin: 0px 5px 0px 5px;
+}
+
+.socialMediaFacebook {
+  background: url("http://www.projectautomata.com/wp-content/themes/Project%20Automata%20WordPress%20Theme%202.0/images/footerFacebook.png");
+  background-size: 100%;
+  background-repeat: no-repeat;
+}
+
+.socialMediaTwitter {
+  background: url("http://www.projectautomata.com/wp-content/themes/Project%20Automata%20WordPress%20Theme%202.0/images/footerTwitter.png");
+  background-size: 100%;
+  background-repeat: no-repeat;
+}
+
+.socialMediaYouTube {
+  background: url("http://www.projectautomata.com/wp-content/themes/Project%20Automata%20WordPress%20Theme%202.0/images/footerYouTube.png");
+  background-size: 100%;
+  background-repeat: no-repeat;
+}
+
+.socialMediaReddit {
+  background: url("http://www.projectautomata.com/wp-content/themes/Project%20Automata%20WordPress%20Theme%202.0/images/footerReddit.png");
+  background-size: 100%;
+  background-repeat: no-repeat;
+}
+
+.socialMediaGooglePlus {
+  background: url("http://www.projectautomata.com/wp-content/themes/Project%20Automata%20WordPress%20Theme%202.0/images/footerGooglePlus.png");
+  background-size: 100%;
+  background-repeat: no-repeat;
+}
+
+/******************************************************************************/
+/************************** MOBILE ADJUSTMENTS (800PX) ************************/
+/******************************************************************************/
+
+@media screen and (max-width: 800px)
+{
+
+  #navigationPanelMenu {
+    display: none;
+  }
+
+  #introductionPanel {
+    display: none;
+  }
+
+  #gameFeatures {
+    display: none;
+  }
+
+  #gameDescription {
+    display: none;
+  }
+
+  #gameDescription {
+    display: none;
+  }
+
+  #featuredContent ul li {
+    float: none;
+    max-width: 100%;
+  }
+
+  #newsletterRegistration {
+    height: 140px;
+  }
+
+  #mc_embed_signup input.email {
+    width: 55%;
+  }
+
+  #rightSide {
+    display: none;
+  }
+
+  #leftSide {
+    width: 100%;
+  }
+
+  #panelContainer {
+    width: 100%;
+  }
+
+  #footerNavigationPanelMenu {
+    display: none;
+  }
+
+  #socialMedia {
+    padding: 0px;
+  }
+
+  .mobileFriendlyImage {
+    width: 100% !important;
+    float: left;
+    max-height: 160px;
+  }
+
+  .wp-caption {
+    width: 100% !important;
+  }
+
+  .wpcf7-form-control {
+    width: 100%;
+  }
+
+}
+
