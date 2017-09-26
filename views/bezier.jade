@@ -1,7 +1,32 @@
 html
+  style.
+    .save{
+      position: absolute;
+      top: 10;
+      left: 10;
+      width: 45px;
+      height: 20px;
+    }
+    .load{
+      position: absolute;
+      top: 40;
+      left: 10;
+      width: 45px;
+      height: 20px;
+    }
   body
+    button.save SAVE
+    button.load LOAD
     canvas#canvas
+    script(src='/js/point.js')
+    script(src='/js/canvas_state.js')
+    script(src='/js/array_plugin.js')
+    script(src='https://code.jquery.com/jquery-3.2.1.min.js'
+          integrity='sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4='
+          crossorigin='anonymous')
     script.
+      var canvasState = new CanvasState();
+      
       var canvas = document.getElementById('canvas');
       canvas.width = window.innerWidth
       canvas.height = window.innerHeight
@@ -11,8 +36,14 @@ html
       var counter = 0;
       var bezierStartPoint;
       function Point(x,y){
-        this.x = x || 0;
-        this.y = y || 0;
+        if (arguments.length == 2) {
+          this.x = x || 0;
+          this.y = y || 0;
+        } else {// Point(e)
+          e = x; // e: Event
+          this.x = e.clientX - 9 || 0;
+          this.y = e.clientY - 10 || 0;
+        }
       }
       function Shape(point, radius){
         this.drawing = true;
@@ -42,18 +73,16 @@ html
       var bezierDraw = function(e){
         // Tracking of Start Point, cp1, cp2, End Point
         // Start Point == cp1
-        start = new Point(myShapes[0].point.x, myShapes[0].point.y)
-        end = new Point(myShapes[1].point.x, myShapes[1].point.y)
+        start = new Point(myShapes.nextToLast().point.x, myShapes.nextToLast().point.y)
+        cp2 = new Point(e)
+        end = new Point(myShapes.last().point.x, myShapes.last().point.y)
         Clear();
-        ctx.beginPath();
-        ctx.moveTo(start.x, start.y);
-        ctx.bezierCurveTo(start.x, start.y, e.clientX, e.clientY, end.x, end.y);
-        ctx.stroke();
-        ctx.closePath();
+        curve = new canvasState.curve(start, null, cp2, end)
+        curve.draw(ctx);
       }
       var startPoint = function(e){
         console.log('start')
-        bezierStartPoint = new Point(e.clientX, e.clientY)
+        bezierStartPoint = new Point(e)
         circle = new Shape(bezierStartPoint, radius)
         circle.draw();
         myShapes.push(circle);
@@ -62,19 +91,10 @@ html
       }
       var endPoint = function(e){
         console.log('end')
-        bezierEndPoint = new Point(e.clientX, e.clientY)
+        bezierEndPoint = new Point(e)
         circle = new Shape(bezierEndPoint, radius)
         circle.draw();
         myShapes.push(circle);
-        //- ctx.beginPath();
-        //- ctx.moveTo(bezierStartPoint.x, bezierStartPoint.y);
-        //- ctx.lineTo(e.clientX, e.clientY);
-        //- ctx.strokeStyle = 'tomato';
-        //- ctx.stroke()
-        //- ctx.arc(e.clientX, e.clientY, radius, 0, Math.PI*2);
-        //- ctx.fillStyle = 'tomato';
-        //- ctx.fill()
-        //- ctx.closePath();
 
         canvas.removeEventListener('mousedown', controller);
         canvas.addEventListener('mousemove', bezierDraw);
@@ -83,7 +103,49 @@ html
       }
       stopBezier = function(e){
         canvas.removeEventListener('mousemove', bezierDraw);
+        canvasState.saveNewCurve();
+        canvas.removeEventListener('mousedown', stopBezier);
+        canvas.addEventListener('mousedown', controller);
+      }
+      DrawAll = function(){
+        Clear();
+        myShapes.forEach(function(circle){
+          circle.draw();
+        })
+        canvasState.curves.forEach(function(curve){
+          curve.draw(ctx);
+        })
       }
 
 
       canvas.addEventListener('mousedown', controller);
+      window.addEventListener('keypress', function(e){
+        console.log('keypressed');
+        code = e.which || e.keyCode;
+        if(100 == code){
+          console.log('code == 100');
+          DrawAll();
+        }
+      });
+
+      $(document).ready(function() {
+        $('.save').click(function(){
+          $.ajax({
+            url: '/bezier/save',
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify(canvasState.curves.last().toJSON())
+          })
+        });
+
+        $('.load').click(function(){
+          $.ajax({
+            url: '/bezier/load',
+            type: 'GET',
+            contentType: 'application/json',
+            success: function(data){
+              canvasState.load(data, ctx);
+            }
+          })
+        });
+      });
