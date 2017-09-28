@@ -2,7 +2,10 @@ express =  require('express');
 
 nodemailer = require('nodemailer');
 
+async = require('async');
+forEach = require('async-foreach').forEach;
 Newsletter = require('../models/newsletter');
+const Canvas = require('../models/canvas_state')
 Bezier = require('../models/bezier');
 fs = require('fs');
 path = require('path');
@@ -38,23 +41,50 @@ router.get('/bezier', function(req, res){
   res.render('bezier', {});
 });
 
-router.get('/bezier/load', function(req, res){
-  Bezier.findOne({id: 1}, function(err, curve){
+router.get('/canvas/index', function(req, res){
+  Canvas.find({}, function(err, _states){
     if(err)
       console.error(err);
-    res.send({curve: curve});
+    res.send({list: _states});
+  })
+})
+router.get('/bezier/load/:id', function(req, res){
+  Canvas.findOne({id: req.params.id}, function(err, _state){
+    if(err)
+      console.error(err);
+    _state.getCurves(function(curves){
+      res.send({canvas_state: curves});
+    })
   })
 });
 router.post('/bezier/save', function(req, res){
-  if(req.body.curve ==  null)
+  if(req.body.canvas_state ==  null)
     return res.status(400).send({err: 'No curve data'});
-  bezier = new Bezier();
-  bezier.serialize(req.body.curve, function(err){
-    if(err){
-      console.log(err)
-      return res.status(500).send(err);
-    }
-    res.send('Success');
+  
+  // serialize all curves to canvas_state
+  var curves = []; 
+  var _name = req.body.name;
+  forEach(req.body.canvas_state, function(_item){
+    var done = this.async();
+    bezier = new Bezier();
+    bezier.serialize(_item.curve, function(err, curve){
+      if(err){
+        console.log(err)
+        return res.status(500).send(err);
+      }
+      console.log('bezier id: ' + curve.id);
+      curves.push(curve.id);
+      done();
+    })
+  }, function(){
+    canvas = new Canvas();
+    canvas.name = _name; 
+    canvas.curves = curves;
+    canvas.save(function(err){
+      if(err)
+        console.error(err);
+      return res.send('ok');
+    });
   })
 });
 

@@ -7,6 +7,18 @@ html
       width: 45px;
       height: 20px;
     }
+    input[name=canvas_name]{
+      position: absolute;
+      top: 10px;
+      left: 65px;
+      width: 165px;
+      height: 20px;
+    }
+    .saved{
+      position: absolute;
+      top: 10;
+      left: 240;
+    }
     .load{
       position: absolute;
       top: 40;
@@ -14,9 +26,28 @@ html
       width: 45px;
       height: 20px;
     }
+    .load_menu{
+      margin: 20px;
+    }
+    .container{
+      position: absolute;
+      top: 70;
+      left: 10;
+      width: 100px;
+      height: 200px;
+    }
+    .canvas_indices{
+      width: 45;
+      height: 20px;
+    }
   body
-    button.save SAVE
+    form
+      input(placeholder='name' type='text' name='canvas_name' required)
+      button.save SAVE
+    div.saved Saved!
     button.load LOAD
+    div.container
+      div.load_menu
     canvas#canvas
     script(src='/js/point.js')
     script(src='/js/canvas_state.js')
@@ -129,23 +160,44 @@ html
       });
 
       $(document).ready(function() {
-        $('.save').click(function(){
+        $(".saved").hide();
+        $('.save').click(function(e){
+          e.preventDefault()
+          _name = $('input[name=canvas_name]').val()
           $.ajax({
             url: '/bezier/save',
             type: 'POST',
             contentType: 'application/json',
-            data: JSON.stringify(canvasState.curves.last().toJSON())
+            data: JSON.stringify(canvasState.toJSON(_name)),
+            success: function(){
+              $(".saved").show();
+              $(".saved").delay(2000).fadeOut(1000); 
+            }
           })
         });
 
         $('.load').click(function(){
           $.ajax({
-            url: '/bezier/load',
+            url: '/canvas/index',
             type: 'GET',
             contentType: 'application/json',
             success: function(data){
-              canvasState.load(data, ctx);
+              $('.load_menu').empty();
+              data.list.forEach(function(_canvas){
+                $('.load_menu').append('<button class="canvas_indices" id="' + _canvas.id + '"> ' + _canvas.name + ' </button>')
+                $('#' + _canvas.id).click(function(){
+                  $.ajax({
+                    url: '/bezier/load/' + _canvas.id,
+                    type: 'GET',
+                    contentType: 'application/json',
+                    success: function(data){
+                      Clear();
+                      canvasState.load(data, ctx);
+                    }
+                  })
+                })
+              })
             }
           })
-        });
+        })
       });
