@@ -41,6 +41,10 @@ router.get('/bezier', function(req, res){
   res.render('bezier', {});
 });
 
+router.get('/proto', function(req, res){
+  res.render('OnTour/proto', {});
+});
+
 router.get('/canvas/index', function(req, res){
   Canvas.find({}, function(err, _states){
     if(err)
