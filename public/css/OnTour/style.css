@@ -60,6 +60,12 @@ main {
   grid-template-columns: repeat(2, 1fr); 
   grid-template-rows: repeat(10, min-content);
 }
+@media (max-width: 600px) {
+  main {
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(10, min-content);
+  }
+}
 @media (min-width: 60em) {
   main {
     grid-template-columns: 10vw repeat(3, 1fr);
