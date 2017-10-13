@@ -3,8 +3,6 @@
 *{
   margin:0;
   padding:0;
-
-
 }
 html,body{width:100%;height:100%;}
 
@@ -19,7 +17,16 @@ body{
 .space{
   height: 100px;
 }
-
+.logo {
+  position: absolute;
+  top: 10;
+  left: 10;
+  width: 5%;
+}
+.navbar {
+  background: rgba(94, 84, 84, 0.7);
+  height: 80px;
+}
 .divider{
   height: 80px;
   background: rgb(32, 84, 0);
@@ -41,6 +48,10 @@ body{
 
 .welcomeText,.form,.social{ width:100%; }
 /*welcome text*/
+.social {
+  display: none;
+  background: rgba(94, 84, 84, 0.7);
+}
 .welcome{
   height:100px;
   position:relative;
