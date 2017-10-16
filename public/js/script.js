@@ -5,7 +5,7 @@ window.addEventListener('load',function(){
         container=document.querySelector('.social'),
         follow  = document.querySelector('.followUs'),
         social  = document.querySelectorAll('.socialIcon'),
-        delay = 1000; 
+        delay = 0; 
     
     
     setTimeout(function(){welcome.style.top='0';},delay);

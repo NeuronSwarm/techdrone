@@ -26,6 +26,10 @@ router.post('/email/add', function(req, res){
 
 });
 
+router.get('/particles', function(req, res){
+  res.render('voronoi', {});
+})
+
 router.get('/email/send', function(req, res){
   Newsletter.send(req,res, function(err, info){
     if(err) return res.send(err);
