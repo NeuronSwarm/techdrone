@@ -8,37 +8,23 @@ body
     #crouton
       ul
         li
-          a(href='#') About
+          a(href='#particles-js') About
         li
-          a(href='#') Social
+          a(href='#welcomecontainer') Social
         li
-          a(href='#') Contact
+          a.contact(href='#') Contact
         li
-          a(href='#') Projects
-  div#particles-js
-    .profilecontainer
-      .row
-        .col-md-1
-        .col-md-4.profile
-          .col-md-3
-            img(src='/img/will.png')
-          .col-md-9
-            h3 
-              strong Will Hendrickson
-            div Founder, Lead Developer and Artist
-          // “Will is Driven by a passion for programming and game development, I started Tech Drone in Feb. 2011 after ten years of hobbyist development. Originally formed to facilitate my dream game, the company is now focused on improving the process of game development for others. We produce MultiGame, a rapid development tool for Unity that allows complex real-time online or offline games to be made quickly, without visual logic editors. It also serves as a “glue” to hold the separate parts of a game together. We also provide development services, with a focus on quality.”
-        .col-md-1
-        .col-md-4.profile
-          .col-md-3
-            img(src='/img/professional.jpg')
-          .col-md-9
-            h3
-              strong Ty Connors
-            div Network Engineer and Crossfit Junky.
+          a(href='#projects') Projects
 
-
-
-  .divider
+  #contentpanel
+    div.dronepanel
+      h1
+        strong TECHDRONE
+      h2 
+        strong YOU IMAGINE IT, WE BUILD IT
+    img#galaxy(title='blue drone', alt='', src='/img/PowerControllerDrone.png', style='width:50%;', scale='0')
+    img#galaxy(title='red drone', alt='', src='/img/red_drone1_cropped.png', style='width:50%;', scale='0')
+  #projects.divider
     p Serving great clients since 2011
   #featuredContent
     ul
@@ -67,14 +53,30 @@ body
           .post-image
             img.wp-post-image(title='image title', alt='thumb image', src='/img/NodeWorldUI.png', style='width:100%; height:272px;', scale='0')
   .divider
-  #contentpanel
-    div.dronepanel
-      h1 TECHDRONE
-      h2 YOU IMAGINE IT, WE BUILD IT
-    img#galaxy(title='blue drone', alt='', src='/img/PowerControllerDrone.png', style='width:50%;', scale='0')
-    img#galaxy(title='red drone', alt='', src='/img/red_drone1_cropped.png', style='width:50%;', scale='0')
+  div#particles-js
+    #profilecontainer
+      .row
+        .col-md-1
+        .col-md-4.profile
+          .col-md-3
+            img(src='/img/will.png')
+          .col-md-9
+            h3 
+              strong Will Hendrickson
+            div Founder, Lead Developer and Artist
+          // “Will is Driven by a passion for programming and game development, I started Tech Drone in Feb. 2011 after ten years of hobbyist development. Originally formed to facilitate my dream game, the company is now focused on improving the process of game development for others. We produce MultiGame, a rapid development tool for Unity that allows complex real-time online or offline games to be made quickly, without visual logic editors. It also serves as a “glue” to hold the separate parts of a game together. We also provide development services, with a focus on quality.”
+        .col-md-1
+        .col-md-4.profile
+          .col-md-3
+            img(src='/img/professional.jpg')
+          .col-md-9
+            h3
+              strong Ty Connors
+            div Network Engineer, Security Expert and Crossfit Junky
+
+
   #contentPanel
-    .welcomecontainer
+    #welcomecontainer
       .content
         .welcomeText
           .welcome

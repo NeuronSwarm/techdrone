@@ -10,7 +10,7 @@ body{
   font-family:junge,georgia;
   text-align:center;
 }
-.welcomecontainer {
+#welcomecontainer {
   height: 800;
   background:url('/img/buildings-1.png')no-repeat;
   background-size:cover;
@@ -19,6 +19,7 @@ body{
 #particles-js {
   position: relative;
   background: blue;
+  height: 400px;
 }
 
 .space{
@@ -74,9 +75,12 @@ body{
   position:absolute;
   top:100%;
   font-size:50px;
+  font-weight:bold;
   text-align:center;
   line-height:100px;
   transition:all .5s;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: grey;
 }
 /*taglines*/
 .subText{
@@ -303,13 +307,11 @@ a:hover, a:focus {
 
 .alignLeft {
   display: inline;
-  float: left;
   margin: .75em 1.5em .75em 0;
 }
 
 .alignRight {
   display: inline;
-  float: right;
   margin: .75em 0 .75em 1.5em;
 }
 
@@ -334,14 +336,13 @@ a:hover, a:focus {
   width: 100%;
   margin: 0 auto;
   background-color: black;
-  float: left;
 }
 
 /******************************************************************************/
 /******************************** NAVIGATION **********************************/
 /******************************************************************************/
 
-.profilecontainer {
+#profilecontainer {
   width: 100%;
   position: absolute;
   top: 30%;
@@ -352,6 +353,10 @@ a:hover, a:focus {
   background: rgba(0, 172, 0, .5);
   color: white;
   font-size: 20px;
+}
+.profile h3 {
+  color: lightgrey;
+  color: lightgrey;
 }
 .profile img{
   width: 100%;
