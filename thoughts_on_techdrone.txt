@@ -10,3 +10,5 @@ Heli Havoc section
 Primita
 ========
 interesting name 
+
+                // “Will is Driven by a passion for programming and game development, I started Tech Drone in Feb. 2011 after ten years of hobbyist development. Originally formed to facilitate my dream game, the company is now focused on improving the process of game development for others. We produce MultiGame, a rapid development tool for Unity that allows complex real-time online or offline games to be made quickly, without visual logic editors. It also serves as a “glue” to hold the separate parts of a game together. We also provide development services, with a focus on quality.”

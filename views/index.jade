@@ -1,101 +1,116 @@
 html
+head
+  meta(name='viewport', content='width=device-width')
 link(href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css", rel='stylesheet', crossorigin="anonymous")
 link(rel='stylesheet', href='css/style.css')
-link(rel='stylesheet', href='css/crouton.css')
 body
-  .m_navbar
-    img.logo(src='/img/TechDroneDiamondLogo.png')
-    #crouton
-      ul
-        li
-          a(href='#particles-js') About
-        li
-          a(href='#welcomecontainer') Social
-        li
-          a.contact(href='#') Contact
-        li
-          a(href='#projects') Projects
-
-  #contentpanel
-    div.dronepanel
-      h1
-        strong TECHDRONE
-      h2 
-        strong YOU IMAGINE IT, WE BUILD IT
-    img#galaxy(title='blue drone', alt='', src='/img/PowerControllerDrone.png', style='width:50%;', scale='0')
-    img#galaxy(title='red drone', alt='', src='/img/red_drone1_cropped.png', style='width:50%;', scale='0')
-  #projects.divider
-    p Serving great clients since 2011
-  #featuredContent
-    ul
-      li
-        .featuredContentTitle
-          .featuredContentTitleName
-            h4 Play Online
-          a.hyperButton(href='/img/Login1.png') Read More
-        .featuredContentThumbnail
-          .post-image
-            img.wp-post-image(title='image title', alt='thumb image', src='/img/Storm.png', style='width:100%; height:272px;', scale='0')
-      li
-        .featuredContentTitle
-          .featuredContentTitleName
-            h4 User Authentication
-          a.hyperButton(href='') Read More
-        .featuredContentThumbnail
-          .post-image
-            img.wp-post-image(title='image title', alt='thumb image', src='/img/Login1.png', style='width:100%; height:272px;', scale='0')
-      li
-        .featuredContentTitle
-          .featuredContentTitleName
-            h4 Save Your Worlds 
-          a.hyperButton(href='') Read More
-        .featuredContentThumbnail
-          .post-image
-            img.wp-post-image(title='image title', alt='thumb image', src='/img/NodeWorldUI.png', style='width:100%; height:272px;', scale='0')
-  .divider
-  div#particles-js
-    #profilecontainer
-      .row
-        .col-md-1
-        .col-md-4.profile
-          .col-md-3
-            img(src='/img/will.png')
-          .col-md-9
-            h3 
-              strong Will Hendrickson
-            div Founder, Lead Developer and Artist
-          // “Will is Driven by a passion for programming and game development, I started Tech Drone in Feb. 2011 after ten years of hobbyist development. Originally formed to facilitate my dream game, the company is now focused on improving the process of game development for others. We produce MultiGame, a rapid development tool for Unity that allows complex real-time online or offline games to be made quickly, without visual logic editors. It also serves as a “glue” to hold the separate parts of a game together. We also provide development services, with a focus on quality.”
-        .col-md-1
-        .col-md-4.profile
-          .col-md-3
-            img(src='/img/professional.jpg')
-          .col-md-9
-            h3
-              strong Ty Connors
-            div Network Engineer, Security Expert and Crossfit Junky
+  .row
+    .col-lg-3.no-padding.hack.side-banner
+      img.full(src='/img/banner-visualizer.png')
+    .col-md-12.col-xl-6.no-padding.hack
+      .full
+        nav.navbar.navbar-inverse.navbar-static-top.logo
+          .container
+            .navbar-header
+              button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='#navbar6')
+                span.sr-only Toggle navigation
+                span.icon-bar
+                span.icon-bar
+                span.icon-bar
+              a.navbar-brand.text-hide(href='http://disputebills.com')
+                | Brand Text
+            #navbar6.navbar-collapse.collapse
+              ul.nav.navbar-nav.navbar-right
+                li.active
+                  a(href='#') Home
+                li
+                  a(href='#') About
+                li
+                  a(href='#') Contact
 
 
-  #contentPanel
-    #welcomecontainer
-      .content
-        .welcomeText
-          .welcome
-            h1.greet GAMES DONE RIGHT
-          .subText
-            .subTexts
-              p.subscribe 
-              p.soon We are launching soon
-        .social
-          .form
-            div.sub
-              input.email(type='email')
-              button.button Subscribe
-          .follow
-            p.followUs FOLLOW US
-          .socialIcons
-            .socialIcon.facebook.brandico-facebook-rect
-            .socialIcon.twitter.brandico-twitter-bird
-            .socialIcon.github.brandico-github
+        #contentpanel
+          div.dronepanel
+            h2 
+              strong HAPPY HALLOWEEN
+          img#galaxy.col-xs-12.col-md-6.no-padding(title='blue drone', alt='', src='/img/PowerControllerDrone.png')
+          img#galaxy.col-xs-12.col-md-6.no-padding(title='red drone', alt='', src='/img/red_drone1_cropped.png')
+        #projects.divider
+          p Serving great clients since 2011
+        #featuredContent
+          ul  
+          
+            li
+              .featuredContentTitle
+                .featuredContentTitleName
+                  h4 Play Online
+                a.hyperButton(href='/img/Login1.png') Read More
+              .featuredContentThumbnail
+                .post-image
+                  img.wp-post-image(title='image title', alt='thumb image', src='/img/Storm.png', style='width:100%; height:272px;', scale='0')
+            li
+              .featuredContentTitle
+                .featuredContentTitleName
+                  h4 User Authentication
+                a.hyperButton(href='') Read More
+              .featuredContentThumbnail
+                .post-image
+                  img.wp-post-image(title='image title', alt='thumb image', src='/img/Login1.png', style='width:100%; height:272px;', scale='0')
+            li
+              .featuredContentTitle
+                .featuredContentTitleName
+                  h4 Save Your Worlds 
+                a.hyperButton(href='') Read More
+              .featuredContentThumbnail
+                .post-image
+                  img.wp-post-image(title='image title', alt='thumb image', src='/img/NodeWorldUI.png', style='width:100%; height:272px;', scale='0')
+        .divider
+        div#particles-js
+          #profilecontainer
+            .row
+              .col-sm-2.col-md-1
+              .col-xs-8.col-sm-8.col-md-4.profile
+                .row.relative
+                  .col-xs-3.col-sm-3.col-md-3
+                    img(src='/img/will.png')
+                  .col-sm-9.col-md-9.profiletext
+                    h3 
+                      strong Will Hendrickson
+                    div Chief Executive & Producer
+              .col-xs-2.col-sm-2.col-md-1
+              .col-xs-8.col-sm-8.col-md-4.profile
+                .row.relative
+                  .col-xs-3.col-sm-3.col-md-3
+                    img(src='/img/professional.jpg')
+                  .col-sm-9.col-md-9.profiletext
+                    h3
+                      strong Ty Connors
+                    div Network Engineer & Security
+
+
+        #contentPanel
+          #welcomecontainer
+            .content
+              .welcomeText
+                .welcome
+                  h1.greet NEWSLETTER
+                .subText
+                  .subTexts
+                    p.subscribe 
+                    p.soon We are launching soon
+              .social
+                .form
+                  div.sub
+                    input.email(type='email')
+                    button.button Subscribe
+                .follow
+                  p.followUs FOLLOW US
+                .socialIcons
+                  a.socialIcon.facebook.brandico-facebook-rect 
+                  a.socialIcon.twitter.brandico-twitter-bird
+                  a.socialIcon.github.brandico-github
+    .col-lg-3.no-padding.side-banner
+      img.full(src='/img/banner-visualizer-right.png')
 
   script(src='https://code.jquery.com/jquery-3.2.1.min.js'
         integrity='sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4='
