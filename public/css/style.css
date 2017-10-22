@@ -21,7 +21,7 @@ body{
   text-align:center;
 }
 #welcomecontainer {
-  height: 800;
+  height: 800px;
   background:url('/img/buildings-1.png')no-repeat;
   background-size:cover;
 }
@@ -355,7 +355,7 @@ a img {
 }
 
 a, a:visited {
-  color: #C97D0F;
+  color: #ffffff;
   text-decoration: none;
   outline: 0;
 }
@@ -433,7 +433,6 @@ a:hover, a:focus {
 }
 @media screen and (min-width: 800px){
   img#galaxy{
-    height: 800px;
   }
 }
 #navigationPanel {
@@ -716,7 +715,7 @@ a:hover, a:focus {
 
 .hyperButton
 {
-  background-color: #C97D0F;
+  background-color: rgba(13, 224, 255, 0.7);
   padding: 7px 30px 7px 30px;
   color: #F1EBD5 !important;
   font-family: 'Oswald', sans-serif;
@@ -970,8 +969,11 @@ input, button {
   margin: 0;
   transition: all 0.23s ease-in-out 0s;
   text-transform: uppercase !important;
-  font-size: 20px;
+  font-size: 16px;
   font-family: 'Oswald', sans-serif;
+}
+@media screen and (min-width: 800px){
+  /* button { font-size: } */
 }
 
 .wp-caption {
