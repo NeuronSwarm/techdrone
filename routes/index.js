@@ -17,6 +17,9 @@ router.get('/', function(req, res){
   //res.send('Hello World');
 });
 
+router.get('/blog/terrium', function(req, res){
+  return res.render('blog/post', {});
+});
 router.post('/email/add', function(req, res){
   console.log('email is ' + req.body.email);
   Newsletter.add(req, res, function(err, message){
