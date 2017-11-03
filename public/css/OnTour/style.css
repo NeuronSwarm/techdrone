@@ -73,6 +73,7 @@ main {
   }
 }
 
+
 [data-grid='grid-cell'] {
   border-color: #ff0048;
 }
@@ -290,3 +291,6 @@ footer p {
 button:focus {
   outline:0;
 }
+
+
+body { background: black;

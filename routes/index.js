@@ -17,6 +17,9 @@ router.get('/', function(req, res){
   //res.send('Hello World');
 });
 
+router.get('/blog/ridicule', function(req, res){
+  return res.render('blog/ridicule', {});
+});
 router.get('/blog/terrium', function(req, res){
   return res.render('blog/post', {});
 });

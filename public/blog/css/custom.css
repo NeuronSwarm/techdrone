@@ -1,1 +1,5 @@
 /* your styles go here */
+
+body { background: black; color: #ddd}
+body p { background: black; color: #ddd}
+body main.blog-post { background: black; color: #ddd}
