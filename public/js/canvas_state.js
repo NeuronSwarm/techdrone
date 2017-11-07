@@ -19,8 +19,15 @@ CanvasState = function(){
       ctx.bezierCurveTo(this.cp1.x, this.cp1.y,
                         this.cp2.x, this.cp2.y,
                         this.end.x, this.end.y);
-      ctx.stroke();
+      cp2.x += 15;
+      cp2.y += 15;
+      ctx.bezierCurveTo(this.cp2.x, this.cp2.y,
+                        this.cp1.x, this.cp1.y,
+                        this.start.x, this.start.y);
+      ctx.fillstyle = "#112211";
+      ctx.fill();
       ctx.closePath();
+
     }
     this.toJSON = function(){
       _curve = this;

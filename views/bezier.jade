@@ -37,8 +37,23 @@ html
       height: 200px;
     }
     .canvas_indices{
-      width: 45;
-      height: 20px;
+      border-width: 0;
+      color: white;
+      background: url('img/UI/button_normal.png');
+      background-size: 90px 40px;
+      width: 90px;
+      height: 40px;
+    }
+    .canvas_indices:hover{
+      background: url('img/UI/button_hover.png');
+      background-size: 90px 40px;
+    }
+    .canvas_indices:active, .canvas_indices:focus{
+      border-width: 0;
+      border-style: none;
+      outline:0;
+      background: url('img/UI/button_active.png');
+      background-size: 90px 40px;
     }
   body
     form
@@ -110,6 +125,12 @@ html
         Clear();
         curve = new canvasState.curve(start, null, cp2, end)
         curve.draw(ctx);
+        //- cp2.x += 5;
+        //- cp2.y += 5;
+        //- curve2 = new canvasState.curve(start, null, cp2, end)
+        //- curve2.draw(ctx);
+
+
       }
       var startPoint = function(e){
         console.log('start')
