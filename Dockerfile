@@ -1,8 +1,8 @@
 FROM node:boron
 
 # Create app directory
-RUN mkdir -p /var/www/node_server
-WORKDIR /var/www/node_server
+RUN mkdir -p /var/www/techdrone
+WORKDIR /var/www/techdrone
 
 # add our user and group first to make sure their IDs get assigned consistently, 
 # regardless of whatever dependencies get added
