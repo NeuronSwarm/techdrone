@@ -12,7 +12,7 @@ app.set('port', port);
 const server = http.createServer(app)
 var spectators = [];
 
-server.listen(port, (err) => {  
+server.listen(port, 'localhost', (err) => {  
   if (err) {
     return console.log('something bad happened', err)
   }
