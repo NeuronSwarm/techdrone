@@ -24,6 +24,7 @@ CanvasState = function(){
       ctx.bezierCurveTo(this.cp2.x, this.cp2.y,
                         this.cp1.x, this.cp1.y,
                         this.start.x, this.start.y);
+      console.log("file with style");
       ctx.fillstyle = "#112211";
       ctx.fill();
       ctx.closePath();

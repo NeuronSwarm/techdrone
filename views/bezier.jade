@@ -70,8 +70,11 @@ html
     script(src='https://code.jquery.com/jquery-3.2.1.min.js'
           integrity='sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4='
           crossorigin='anonymous')
+    // exposes the client variable
+    script(src='/js/bezier/client.js')
     script.
       var canvasState = new CanvasState();
+      var client = new Client();
       
       var canvas = document.getElementById('canvas');
       canvas.width = window.innerWidth
@@ -125,12 +128,7 @@ html
         Clear();
         curve = new canvasState.curve(start, null, cp2, end)
         curve.draw(ctx);
-        //- cp2.x += 5;
-        //- cp2.y += 5;
-        //- curve2 = new canvasState.curve(start, null, cp2, end)
-        //- curve2.draw(ctx);
-
-
+        client.send(JSON.stringify(curve.toJSON()));
       }
       var startPoint = function(e){
         console.log('start')
