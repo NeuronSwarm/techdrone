@@ -23,6 +23,14 @@ router.get('/blog/ridicule', function(req, res){
 router.get('/blog/terrium', function(req, res){
   return res.render('blog/post', {});
 });
+
+router.get('/ty', function(req, res){
+  return res.render('profile', {});
+});
+router.get('/stats', function(req, res){
+  return res.render('profile', {});
+});
+
 router.post('/email/add', function(req, res){
   console.log('email is ' + req.body.email);
   Newsletter.add(req, res, function(err, message){

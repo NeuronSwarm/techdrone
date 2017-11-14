@@ -39,6 +39,31 @@
 
   app.use('/', routes);
 
+  // Github Oauth
+
+
+  var githubOAuth = require('github-oauth')({
+    githubClient: process.env['GITHUB_CLIENT'],
+    githubSecret: process.env['GITHUB_SECRET'],
+    baseURL: 'http://localhost:8080',
+    loginURI: '/secretlogin',
+    callbackURI: '/stats',
+    scope: 'user' // optional, default scope is set to user
+  })
+  app.use(function(req, res){
+    if (req.url.match(/login/)) return githubOAuth.login(req, res)
+    if (req.url.match(/callback/)) return githubOAuth.callback(req, res)
+  })
+
+  githubOAuth.on('error', function(err) {
+    console.error('there was a github oauth login error', err)
+  })
+
+  githubOAuth.on('token', function(token, serverResponse) {
+    console.log('here is your shiny new github oauth token', token)
+    serverResponse.end(JSON.stringify(token))
+  })
+
   mongoose.Promise = global.Promise;
 
   if(process.env.NODE_ENV == 'test')
