@@ -6,10 +6,12 @@ html
     .col-md-4.title-panel
       h1.title DRAW BEZIER CURVES
     form
-      input(placeholder='name' type='text' name='canvas_name' required)
-      button.save SAVE
-    .saved Saved!
-    button.load LOAD
+      .canvas_name
+        input(placeholder='name' type='text' name='canvas_name' required)
+      button.save.UIbtn SAVE
+    .saved.onsave-msg Saved!
+    .presence-error.onsave-msg Please name your drawing first.
+    button.load.UIbtn LOAD
     .menu.loadable
       .load_menu
     .instructions.loadable
@@ -21,6 +23,7 @@ html
       li Repeat & have fun
 
     canvas#canvas
+    canvas#tmpCanvas
     script(src='/js/point.js')
     script(src='/js/canvas_state.js')
     script(src='/js/array_plugin.js')
@@ -30,28 +33,26 @@ html
     // exposes the client variable
     script(src='/js/bezier/client.js')
     script.
-      var tmpCanvasCreate = function(){
-        $('body').append('<canvas id="tmpCanvas"></canvas>');
-        var canvas = $('#tmpCanvas')
-        return canvas;
-      }
       var tmpCanvasDraw = function(curve, ctx){
         Clear(ctx);
         curve.draw(ctx);
+      }
+      var setCanvasSize = function(canvas){
+        canvas.width = window.innerWidth
+        canvas.height = window.innerHeight
       }
       var canvasState = new CanvasState();
       var client = new Client();
       
       var canvas = document.getElementById('canvas');
-      canvas.width = window.innerWidth
-      canvas.height = window.innerHeight
+      setCanvasSize(canvas);
       var ctx = canvas.getContext ( "2d" );
       ctx.save ();
 
-      tmpCanvas = tmpCanvasCreate();
-      tmpCanvas[0].width = window.innerWidth
-      tmpCanvas[0].height = window.innerHeight
-      var tmpCTX = tmpCanvas[0].getContext('2d');
+      $tmpCanvas = $('#tmpCanvas');
+      tmpCanvas = $('#tmpCanvas')[0];
+      setCanvasSize(tmpCanvas);
+      var tmpCTX = tmpCanvas.getContext('2d');
       var radius = 5;
       var counter = 0;
       var bezierStartPoint;
@@ -120,18 +121,18 @@ html
         myShapes.push(circle);
 
 
-        tmpCanvas.off('mousedown', controller);
-        tmpCanvas.on('mousemove', bezierDraw);
-        tmpCanvas.on('mousedown', stopBezier);
+        $tmpCanvas.off('mousedown', controller);
+        $tmpCanvas.on('mousemove', bezierDraw);
+        $tmpCanvas.on('mousedown', stopBezier);
         console.log('event added')
       }
       stopBezier = function(e){
-        tmpCanvas = $('#tmpCanvas')
-        tmpCanvas.off('mousemove', bezierDraw);
+        $tmpCanvas = $('#tmpCanvas')
+        $tmpCanvas.off('mousemove', bezierDraw);
         canvasState.saveNewCurve(ctx);
         Clear(tmpCTX)
-        tmpCanvas.off('mousedown', stopBezier);
-        tmpCanvas.on('mousedown', controller);
+        $tmpCanvas.off('mousedown', stopBezier);
+        $tmpCanvas.on('mousedown', controller);
       }
       DrawAll = function(){
         Clear();
@@ -144,21 +145,17 @@ html
       }
 
 
-      tmpCanvas.on('mousedown', controller);
-      window.addEventListener('keypress', function(e){
-        console.log('keypressed');
-        code = e.which || e.keyCode;
-        if(100 == code){
-          console.log('code == 100');
-          DrawAll();
-        }
-      });
 
       $(document).ready(function() {
-        $(".saved").hide();
+        $tmpCanvas.on('mousedown', controller);
         $('.save').click(function(e){
           e.preventDefault()
           _name = $('input[name=canvas_name]').val()
+          if(_name == ''){
+            $(".presence-error").show();
+            $(".presence-error").delay(4000).fadeOut(1000); 
+            return;
+          }
           $.ajax({
             url: '/bezier/save',
             type: 'POST',
@@ -198,5 +195,10 @@ html
               })
             }
           })
+        })
+
+        $(window).on('resize', function(e){
+          setCanvasSize(tmpCanvas);
+          setCanvasSize(canvas);
         })
       });
