@@ -1,68 +1,25 @@
 html
-  style.
-    .save{
-      position: absolute;
-      top: 10;
-      left: 10;
-      width: 45px;
-      height: 20px;
-    }
-    input[name=canvas_name]{
-      position: absolute;
-      top: 10px;
-      left: 65px;
-      width: 165px;
-      height: 20px;
-    }
-    .saved{
-      position: absolute;
-      top: 10;
-      left: 240;
-    }
-    .load{
-      position: absolute;
-      top: 40;
-      left: 10;
-      width: 45px;
-      height: 20px;
-    }
-    .load_menu{
-      margin: 20px;
-    }
-    .container{
-      position: absolute;
-      top: 70;
-      left: 10;
-      width: 100px;
-      height: 200px;
-    }
-    .canvas_indices{
-      border-width: 0;
-      color: white;
-      background: url('img/UI/button_normal.png');
-      background-size: 90px 40px;
-      width: 90px;
-      height: 40px;
-    }
-    .canvas_indices:hover{
-      background: url('img/UI/button_hover.png');
-      background-size: 90px 40px;
-    }
-    .canvas_indices:active, .canvas_indices:focus{
-      border-width: 0;
-      border-style: none;
-      outline:0;
-      background: url('img/UI/button_active.png');
-      background-size: 90px 40px;
-    }
+  link(href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css", rel='stylesheet', crossorigin="anonymous")
+  link(href="css/bezier.css", rel='stylesheet')
   body
+    .col-md-4
+    .col-md-4.title-panel
+      h1.title DRAW BEZIER CURVES
     form
       input(placeholder='name' type='text' name='canvas_name' required)
       button.save SAVE
-    div.saved Saved!
+    .saved Saved!
     button.load LOAD
-    div.container
-      div.load_menu
+    .menu.loadable
+      .load_menu
+    .instructions.loadable
+      h2 HINT
+      li Click to create endpoint
+      li Move & repeat
+      li Move & observe
+      li Click to finish
+      li Repeat & have fun
+
     canvas#canvas
     script(src='/js/point.js')
     script(src='/js/canvas_state.js')
@@ -73,6 +30,15 @@ html
     // exposes the client variable
     script(src='/js/bezier/client.js')
     script.
+      var tmpCanvasCreate = function(){
+        $('body').append('<canvas id="tmpCanvas"></canvas>');
+        var canvas = $('#tmpCanvas')
+        return canvas;
+      }
+      var tmpCanvasDraw = function(curve, ctx){
+        Clear(ctx);
+        curve.draw(ctx);
+      }
       var canvasState = new CanvasState();
       var client = new Client();
       
@@ -81,6 +47,11 @@ html
       canvas.height = window.innerHeight
       var ctx = canvas.getContext ( "2d" );
       ctx.save ();
+
+      tmpCanvas = tmpCanvasCreate();
+      tmpCanvas[0].width = window.innerWidth
+      tmpCanvas[0].height = window.innerHeight
+      var tmpCTX = tmpCanvas[0].getContext('2d');
       var radius = 5;
       var counter = 0;
       var bezierStartPoint;
@@ -107,7 +78,7 @@ html
         }
       }
       myShapes = [];
-      Clear = function(){
+      Clear = function(ctx){
         ctx.clearRect(0, 0, canvas.width, canvas.height);
       }
 
@@ -125,11 +96,13 @@ html
         start = new Point(myShapes.nextToLast().point.x, myShapes.nextToLast().point.y)
         cp2 = new Point(e)
         end = new Point(myShapes.last().point.x, myShapes.last().point.y)
-        Clear();
+        //- Clear();
         curve = new canvasState.curve(start, null, cp2, end)
-        curve.draw(ctx);
+        tmpCanvasDraw(curve, tmpCTX)
+        //- curve.draw(ctx);
         client.send(JSON.stringify(curve.toJSON()));
       }
+      // create tmp canvas based on two endpoints: first and last
       var startPoint = function(e){
         console.log('start')
         bezierStartPoint = new Point(e)
@@ -146,29 +119,32 @@ html
         circle.draw();
         myShapes.push(circle);
 
-        canvas.removeEventListener('mousedown', controller);
-        canvas.addEventListener('mousemove', bezierDraw);
-        canvas.addEventListener('mousedown', stopBezier);
+
+        tmpCanvas.off('mousedown', controller);
+        tmpCanvas.on('mousemove', bezierDraw);
+        tmpCanvas.on('mousedown', stopBezier);
         console.log('event added')
       }
       stopBezier = function(e){
-        canvas.removeEventListener('mousemove', bezierDraw);
-        canvasState.saveNewCurve();
-        canvas.removeEventListener('mousedown', stopBezier);
-        canvas.addEventListener('mousedown', controller);
+        tmpCanvas = $('#tmpCanvas')
+        tmpCanvas.off('mousemove', bezierDraw);
+        canvasState.saveNewCurve(ctx);
+        Clear(tmpCTX)
+        tmpCanvas.off('mousedown', stopBezier);
+        tmpCanvas.on('mousedown', controller);
       }
       DrawAll = function(){
         Clear();
-        myShapes.forEach(function(circle){
-          circle.draw();
-        })
+        //- myShapes.forEach(function(circle){
+        //-   circle.draw();
+        //- })
         canvasState.curves.forEach(function(curve){
           curve.draw(ctx);
         })
       }
 
 
-      canvas.addEventListener('mousedown', controller);
+      tmpCanvas.on('mousedown', controller);
       window.addEventListener('keypress', function(e){
         console.log('keypressed');
         code = e.which || e.keyCode;
@@ -196,6 +172,10 @@ html
         });
 
         $('.load').click(function(){
+          self = $('.load');
+          if(self.text() == 'LOAD') self.text('HIDE');
+          else self.text('LOAD');
+          $('.loadable').toggle();
           $.ajax({
             url: '/canvas/index',
             type: 'GET',
@@ -210,7 +190,7 @@ html
                     type: 'GET',
                     contentType: 'application/json',
                     success: function(data){
-                      Clear();
+                      Clear(ctx);
                       canvasState.load(data, ctx);
                     }
                   })

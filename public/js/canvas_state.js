@@ -5,7 +5,7 @@ CanvasState = function(){
 
   this.curve = function(start, cp1, cp2, end){
     if(cp1 == null)
-      cp1 = start;
+      cp1 = cp2;
 
     this.start = start;
     this.cp1 = cp1;
@@ -24,8 +24,7 @@ CanvasState = function(){
       ctx.bezierCurveTo(this.cp2.x, this.cp2.y,
                         this.cp1.x, this.cp1.y,
                         this.start.x, this.start.y);
-      console.log("file with style");
-      ctx.fillstyle = "#112211";
+      ctx.fillStyle = "tomato";
       ctx.fill();
       ctx.closePath();
 
@@ -63,7 +62,8 @@ CanvasState = function(){
     return _tmp
   }
   // save the latest curve
-  this.saveNewCurve = function(){
+  this.saveNewCurve = function(ctx){
+    _state.tmp.draw(ctx);
     _state.curves.push(_state.tmp);
   }
   this.load = function(data, ctx){

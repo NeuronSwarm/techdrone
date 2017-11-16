@@ -6,6 +6,8 @@
 
   path = require('path');
 
+  favicon = require('serve-favicon');
+
   logger = require('morgan');
 
   bodyParser = require('body-parser');
@@ -36,6 +38,8 @@
 
   app.use(express["static"](path.join(__dirname, '/public')));
 
+  app.use(favicon(__dirname + '/public/img/favicon.ico'));
+
 
   app.use('/', routes);
 
@@ -45,7 +49,7 @@
   var githubOAuth = require('github-oauth')({
     githubClient: process.env['GITHUB_CLIENT'],
     githubSecret: process.env['GITHUB_SECRET'],
-    baseURL: 'http://localhost:8080',
+    baseURL: 'https://techdrone.us',
     loginURI: '/secretlogin',
     callbackURI: '/stats',
     scope: 'user' // optional, default scope is set to user

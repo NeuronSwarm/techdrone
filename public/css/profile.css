@@ -1,6 +1,10 @@
 body {
   font-family: Arial, Helvetica, sans-serif;
   margin-bottom: 100px;
+  background: #dddddd;
+}
+.poster {
+  width: 400px;
 }
 
 h1 {
@@ -13,6 +17,28 @@ h1 {
 h1>small {
   color: #aaaaaa;
   font-size: .5em;
+}
+
+body a, a:hover, a:visited {
+  text-decoration: none;
+}
+li {
+  list-style:none;
+  padding: 3px 0px;
+}
+.now-section li{
+  font-style: italic;
+  font-size: 28px;
+}
+h3 {
+  font-size: 16px;
+  color: grey;
+  font-weight: lighter;
+}
+.social-icons a {
+  padding-left: 4px;
+  padding-right: 4px;
+  font-size: 24px;
 }
 
 header {
