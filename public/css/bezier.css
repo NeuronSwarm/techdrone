@@ -1,3 +1,6 @@
+body {
+  color: white;
+}
 #canvas {
   background: #222;
   position: absolute;
@@ -160,4 +163,19 @@ input[name=canvas_name]{
   text-align: center;
   display: inline-block; 
 
+}
+.viewers {
+  display: none;
+  position: absolute;
+  right: 10px;
+  top: 120px;
+  width: 12%;
+  z-index: 1;
+  border-left: 2px solid #fff;
+}
+.viewers ul {
+  list-style: none;
+}
+.viewers h3 {
+  text-align: center;
 }

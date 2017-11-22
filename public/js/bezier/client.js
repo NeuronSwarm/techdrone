@@ -28,6 +28,10 @@ var Client = function () {
           message.data);
       return;
     }
+    if(json.type == 'specAdded'){
+      self.onSpectatorAdded(json)
+    }
+
     // handle incoming message
     // NOTE: if you're not sure about the JSON structure
     // check the server source code above
@@ -69,5 +73,8 @@ var Client = function () {
 
 Client.prototype.send = function(data){
   this.connection.send(data);
+}
+Client.prototype.onSpectatorAdded = function(data){
+  $('.viewers').trigger('specAdded', [data]);
 }
 

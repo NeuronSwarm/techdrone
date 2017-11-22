@@ -64,6 +64,9 @@ Spectator = function () {
     }
     */
   };
+  connection.onclose = function(data){
+    connection.send(JSON.stringify({type: 'specLeft', id: self.id, data: 'boy bye'}));
+  }
   function makeid() {
     var text = "";
     var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";

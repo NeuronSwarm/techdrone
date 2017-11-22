@@ -21,6 +21,9 @@ html
       li Click to finish
       li Repeat & have fun
 
+    .viewers
+      h3 Spectating
+      ul
     .coordinate-log
     canvas#canvas
     canvas#tmpCanvas
@@ -270,6 +273,11 @@ html
           })
         })
 
+        $('.viewers').on('specAdded', function(e, data){
+          console.log('viewer added');
+          $('.viewers').show();
+          $('.viewers ul').append('<li>' + data.id + '</li>');
+        })
         $(window).on('resize', function(e){
           setCanvasSize(tmpCanvas);
           setCanvasSize(canvas);
