@@ -3,8 +3,7 @@ html
   link(href="css/bezier.css", rel='stylesheet')
   body
     .col-md-4
-    .col-md-4.title-panel
-      h1.title DRAW BEZIER CURVES
+    .col-md-6.title-panel
     form
       .canvas_name
         input(placeholder='name' type='text' name='canvas_name' required)
@@ -22,9 +21,13 @@ html
       li Click to finish
       li Repeat & have fun
 
+    .coordinate-log
     canvas#canvas
     canvas#tmpCanvas
+    canvas#crosshairCanvas
     script(src='/js/point.js')
+    script(src='/js/crosshair.js')
+    script(src='/js/texture.js')
     script(src='/js/canvas_state.js')
     script(src='/js/array_plugin.js')
     script(src='https://code.jquery.com/jquery-3.2.1.min.js'
@@ -41,6 +44,7 @@ html
         canvas.width = window.innerWidth
         canvas.height = window.innerHeight
       }
+      var debug = false;
       var canvasState = new CanvasState();
       var client = new Client();
       
@@ -51,21 +55,73 @@ html
 
       $tmpCanvas = $('#tmpCanvas');
       tmpCanvas = $('#tmpCanvas')[0];
+      $crosshairCanvas = $('#crosshairCanvas');
+      crosshairCanvas = $('#crosshairCanvas')[0];
       setCanvasSize(tmpCanvas);
+      setCanvasSize(crosshairCanvas);
       var tmpCTX = tmpCanvas.getContext('2d');
+      var crosshairCTX = crosshairCanvas.getContext('2d');
+      Clear = function(ctx){
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+      }
+
+
+      tmpCTX.fillStyle = 'white';
+      var _crosshairs = []
+      var currentAnimationID;
+      var _crosshairsRunning = true;
+      var _crosshairCounter = 0;
+      var _synced = false;
+      var StopCrosshair = function(){
+        _crosshairsRunning = false;
+        _crosshairs = [];
+        _synced = false;
+      }
+      var SyncCrosshairs = function(){
+        _crosshairs.forEach(function(c){
+          c.r = 15;
+        })
+        _synced = true;
+      }
+      var DrawCrosshair = function(rootPoint, ctx){
+        _crosshairsRunning = true;
+        var crosshair = new Crosshair(rootPoint, (1 / 24) * Math.PI)
+        _crosshairs.push(crosshair)
+        var loop = function(){
+          Clear(ctx);
+          if(!_crosshairsRunning){
+            cancelAnimationFrame(currentAnimationID);
+            return
+          }
+          if(_crosshairs.length == 2 && !_synced)
+            SyncCrosshairs();
+          _crosshairs.forEach(function(c){
+            c.draw(ctx)
+            c.angle += (1 / 24) * Math.PI;
+            if(_crosshairCounter % 4 == 0)
+              c.toggleColor();
+            if(_crosshairCounter % 3 == 0)
+              c.toggleRadius();
+          })
+
+          _crosshairCounter++
+          setTimeout(function(){
+            currentAnimationID = requestAnimationFrame(loop);
+          }, 200)
+
+        }
+        loop();
+      }
+
+      //- root = new Node(rootPoint)
+      //- opts = { r: 100, theta: 0.785}
+      //- var texture = new Texture(tmpCTX, root, opts)
+      // texture.findOrCreateChildren(root)
+      // texture.draw(new Point(0, 200))
+
       var radius = 5;
       var counter = 0;
       var bezierStartPoint;
-      function Point(x,y){
-        if (arguments.length == 2) {
-          this.x = x || 0;
-          this.y = y || 0;
-        } else {// Point(e)
-          e = x; // e: Event
-          this.x = e.clientX - 9 || 0;
-          this.y = e.clientY - 10 || 0;
-        }
-      }
       function Shape(point, radius){
         this.drawing = true;
         this.point = point;
@@ -79,9 +135,6 @@ html
         }
       }
       myShapes = [];
-      Clear = function(ctx){
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-      }
 
       var controller = function(e){
         if(counter%2 == 0)
@@ -91,6 +144,9 @@ html
         counter++;
       }
 
+      var printCoordinate = function(point){
+        $('.coordinate-log').text('coordinates x: ' + point.x + ' y: ' + point.y );
+      }
       var bezierDraw = function(e){
         // Tracking of Start Point, cp1, cp2, End Point
         // Start Point == cp1
@@ -98,18 +154,25 @@ html
         cp2 = new Point(e)
         end = new Point(myShapes.last().point.x, myShapes.last().point.y)
         //- Clear();
-        curve = new canvasState.curve(start, null, cp2, end)
+        console.log('before: ' + cp2.x);
+        curve = new canvasState.curve(start, null, cp2, end);
+        canvasState.m_curve = curve;
         tmpCanvasDraw(curve, tmpCTX)
+        if(debug)
+          printCoordinate(cp2)
         //- curve.draw(ctx);
         client.send(JSON.stringify(curve.toJSON()));
+        
       }
       // create tmp canvas based on two endpoints: first and last
       var startPoint = function(e){
         console.log('start')
         bezierStartPoint = new Point(e)
         circle = new Shape(bezierStartPoint, radius)
-        circle.draw();
+        //- circle.draw();
+        DrawCrosshair(bezierStartPoint, crosshairCTX);
         myShapes.push(circle);
+
         console.log('x: ' + bezierStartPoint.x)
         console.log('y: ' + bezierStartPoint.y)
       }
@@ -117,7 +180,8 @@ html
         console.log('end')
         bezierEndPoint = new Point(e)
         circle = new Shape(bezierEndPoint, radius)
-        circle.draw();
+        //circle.draw();
+        DrawCrosshair(bezierEndPoint, crosshairCTX);
         myShapes.push(circle);
 
 
@@ -129,8 +193,12 @@ html
       stopBezier = function(e){
         $tmpCanvas = $('#tmpCanvas')
         $tmpCanvas.off('mousemove', bezierDraw);
+
+        StopCrosshair()
+        canvasState.m_curve.draw(ctx);
         canvasState.saveNewCurve(ctx);
-        Clear(tmpCTX)
+        //Clear(tmpCTX)
+
         $tmpCanvas.off('mousedown', stopBezier);
         $tmpCanvas.on('mousedown', controller);
       }
@@ -188,6 +256,7 @@ html
                     contentType: 'application/json',
                     success: function(data){
                       Clear(ctx);
+                      Clear(tmpCTX);
                       canvasState.load(data, ctx);
                     }
                   })

@@ -1,4 +1,5 @@
 CanvasState = function(){
+  this.thickness = 35;
   this.curves = []
   this.tmp; 
   var _state = this;
@@ -11,23 +12,63 @@ CanvasState = function(){
     this.cp1 = cp1;
     this.cp2 = cp2;
     this.end = end;
+    console.log(cp2)
     _state.tmp = this;
 
+    var distance = function(vec1, vec2){
+      return Math.sqrt(Math.pow(vec1.x - vec2.x, 2) + Math.pow(vec1.y - vec2.y, 2))
+    }
+    var multiply = function(scalar, vec){
+      return new Point(scalar*vec.x, scalar*vec.y);
+    }
     this.draw = function(ctx){
+      _curve = this;
       ctx.beginPath();
       ctx.moveTo(this.start.x, this.start.y);
       ctx.bezierCurveTo(this.cp1.x, this.cp1.y,
                         this.cp2.x, this.cp2.y,
                         this.end.x, this.end.y);
-      cp2.x += 15;
-      cp2.y += 15;
-      ctx.bezierCurveTo(this.cp2.x, this.cp2.y,
+      // _tmp = new Point(cp2.x + _state.thickness, cp2.y + _state.thickness);
+      mid = _curve.midpoint();
+      //console.log(['start: ' + start.toString(), 'mid: ' + mid.toString(),'end: ' + end.toString()])
+      var scale = distance(mid, this.cp2);
+      console.log(scale)
+      _tmp = mid.add(multiply(_curve.normal(), scale))
+      //console.log(_tmp)
+      ctx.bezierCurveTo(_tmp.x, _tmp.y,
                         this.cp1.x, this.cp1.y,
                         this.start.x, this.start.y);
       ctx.fillStyle = "tomato";
-      ctx.fill();
       ctx.closePath();
+      ctx.fill();
 
+    }
+    this.normal = function(){
+      // (-dy, dx)
+      dy = this.end.y - this.start.y
+      dx = this.end.x - this.start.x
+      if(this.pointTest() < 0)
+        return new Point(-dy, dx)
+      else
+        return new Point(dy, -dx);
+    }
+    this.midpoint = function(){
+      _s = this.start
+      _e = this.end
+      dy = Math.abs(_e.y - _s.y)
+      dx = Math.abs(_e.x - _s.x)
+      midX = Math.min(_e.x, _s.x) + dx / 2
+      midY = Math.min(_e.y, _s.y) + dy / 2
+      return new Point(midX, midY)
+    }
+    this.pointTest = function(){
+      // if return value negative point is on oneside
+      // if positive point is on the other side
+      _s = this.start
+      _e = this.end
+      _p = this.cp2
+
+      return (_p.x - _s.x) * (_e.y - _s.y) - (_p.y - _s.y) * (_e.x - _s.x)
     }
     this.toJSON = function(){
       _curve = this;
@@ -63,7 +104,8 @@ CanvasState = function(){
   }
   // save the latest curve
   this.saveNewCurve = function(ctx){
-    _state.tmp.draw(ctx);
+    console.log(_state.tmp.cp2)
+    // _state.tmp.draw(ctx);
     _state.curves.push(_state.tmp);
   }
   this.load = function(data, ctx){

@@ -8,3 +8,13 @@ var Point = function(x,y){
     this.y = e.clientY - 10 || 0;
   }
 }
+Point.prototype.add = function(p){
+  // Add point p to this point
+  var tmpx = this.x + p.x;
+  var tmpy = this.y + p.y;
+  return new Point(tmpx, tmpy)
+}
+
+Point.prototype.toString = function(){
+  return '( ' + this.x + ', ' + this.y + ' )';
+}
