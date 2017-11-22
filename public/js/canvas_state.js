@@ -4,6 +4,7 @@ CanvasState = function(){
   this.tmp; 
   var _state = this;
 
+
   this.curve = function(start, cp1, cp2, end){
     if(cp1 == null)
       cp1 = cp2;
@@ -116,6 +117,10 @@ CanvasState = function(){
       _curve.draw(ctx);
     })
   }
+}
+
+CanvasState.prototype.clear = function(ctx){
+  ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
 }
 
 var CurveFromJSON = function(data){

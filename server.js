@@ -41,7 +41,6 @@ wsServer.on('request', function(request) {
         return;
       }
       if(obj.curve){
-        console.log('message curve: ' + obj.curve.cp2.x);
         spectators.forEach(function(spectator){
           spectator.connection.sendUTF(JSON.stringify(obj));
         })

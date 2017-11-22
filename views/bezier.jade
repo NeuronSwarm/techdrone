@@ -197,6 +197,10 @@ html
         StopCrosshair()
         canvasState.m_curve.draw(ctx);
         canvasState.saveNewCurve(ctx);
+        var message = canvasState.m_curve.toJSON()
+        message.permanent = true;
+
+        client.send(JSON.stringify(message));
         //Clear(tmpCTX)
 
         $tmpCanvas.off('mousedown', stopBezier);

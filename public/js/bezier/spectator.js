@@ -34,8 +34,12 @@ Spectator = function () {
     console.log(json);
     console.log('spectator ' + self.id + ' received message');
     if(self.canvasState){
+      canvasState.clear(tmpCTX);
       curve = CurveFromJSON(json, self.canvasState.curve);
-      curve.draw(self.ctx);
+      if(json.permanent)
+        curve.draw(self.ctx);
+      else
+        curve.draw(self.tmpCTX);
     }
 
     /*
@@ -71,9 +75,10 @@ Spectator = function () {
   }
 }
 
-Spectator.prototype.addPlugin = function(plug, ctx){
+Spectator.prototype.addPlugin = function(plug, ctx, tmpCTX){
   this.canvasState = plug;
   this.ctx = ctx;
+  this.tmpCTX = tmpCTX;
 }
 
 var CurveFromJSON = function(data, curve){
