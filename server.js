@@ -31,7 +31,6 @@ wsServer.on('request', function(request) {
   // This is the most important callback for us, we'll handle
   // all messages from users here.
   connection.on('message', function(message) {
-    console.log(message.type)
     if (message.type === 'utf8') {
       // console.log(message.utf8Data);
       
