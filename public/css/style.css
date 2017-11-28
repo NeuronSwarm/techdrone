@@ -45,7 +45,9 @@ body{
 }
 .logo {
   background: url('/img/TechDroneLogoFull.png') center / contain no-repeat;
+  margin-left: 40px;
   width: 300px;
+  height: 100px;
 }
 @media screen and (max-width: 480px){
   .logo {
@@ -54,9 +56,15 @@ body{
     /* width: 300px; */
   }
 }
-.m_navbar {
-  background: rgb(0, 0, 0);
+#navbar6 {
+  position:absolute;
+  top: 0;
+  background: rgba(0, 0, 0,0);
   height: 80px;
+}
+.nav-container {
+  position:absolute;
+  top: 0;
 }
 .divider{
   height: 80px;
@@ -178,13 +186,23 @@ body{
 
 .dronepanel {
   position: absolute;
-  top: 7%;
-  left: 33%;
+  top: 14%;
+  left: 35%;
   max-width: 35%;
-  background: rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.3);
   border-radius: 5%;
   padding: 10px;
   z-index: 10;
+}
+@media screen and (min-width: 1000px) and (max-width: 1100px){
+  .dronepanel{
+    left: 34%;
+  }
+}
+@media screen and (min-width: 1270px) and (max-width: 1599px){
+  .dronepanel{
+    left: 36%;
+  }
 }
 @media screen and (max-width: 480px){
   .dronepanel {
@@ -377,9 +395,17 @@ a, a:visited {
 }
 
 a:hover, a:focus {
-  color: #AD6204;
+
+
+  color: #ff2e2e;
   text-decoration: none;
   outline: 0;
+}
+ul.nav a:hover {
+  background: rgba(255,255,255,.3);
+}
+li.active a {
+  color: #49afdd;
 }
 
 .kickstarterSupport {
@@ -421,6 +447,7 @@ a:hover, a:focus {
   width: 100%;
   margin: 0 auto;
   background-color: black;
+  overflow:auto;
 }
 
 /******************************************************************************/

@@ -10,8 +10,9 @@ body
       img.full(src='/img/banner-visualizer.png')
     .col-md-12.col-xl-6.no-padding.hack
       .full
-        nav.navbar.navbar-inverse.navbar-static-top.logo
-          .container
+        nav#navbar6.navbar.navbar-static-top
+          .logo
+          .container.nav-container
             .navbar-header
               button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='#navbar6')
                 span.sr-only Toggle navigation
@@ -20,7 +21,7 @@ body
                 span.icon-bar
               a.navbar-brand.text-hide(href='http://disputebills.com')
                 | Brand Text
-            #navbar6.navbar-collapse.collapse
+            .navbar-collapse.collapse
               ul.nav.navbar-nav.navbar-right
                 li.active
                   a(href='#') Home
@@ -41,10 +42,8 @@ body
             h3 IN THE
             h2
               strong WAR OF ATTRITION
-          img#galaxy.col-xs-12.col-md-6.no-padding(title='blue drone', alt='', src='/img/PowerControllerDrone1.png')
-          img#galaxy.col-xs-12.col-md-6.no-padding(title='red drone', alt='', src='/img/red_drone_resized.png')
-        #projects.divider
-          p Serving great clients since 2011
+          img#galaxy.col-xs-12.col-md-6.no-padding(title='blue drone', alt='', src='/img/bluedrone.png')
+          img#galaxy.col-xs-12.col-md-6.no-padding(title='red drone', alt='', src='/img/blazedrone.png')
         #featuredContent
           ul  
           
