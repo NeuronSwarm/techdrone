@@ -19,19 +19,19 @@ body
                 span.icon-bar
                 span.icon-bar
                 span.icon-bar
-              a.navbar-brand.text-hide(href='http://disputebills.com')
+              a.navbar-brand.text-hide(href='')
                 | Brand Text
             .navbar-collapse.collapse
               ul.nav.navbar-nav.navbar-right
                 li.active
-                  a(href='#') Home
+                  a(href='#home') Home
                 li
-                  a(href='#') About
+                  a(href='#particles-js') About
                 li
-                  a(href='#') Contact
+                  a(href='#welcomecontainer') Contact
 
 
-        #contentpanel
+        #home.contentPanel
           div.dronepanel
             h2 
               strong(style='color: #49afdd') BLUE 
@@ -95,7 +95,7 @@ body
                     div Network Engineer & Security
 
 
-        #contentPanel
+        .contentPanel
           #welcomecontainer
             .content
               .welcomeText
@@ -122,6 +122,7 @@ body
   script(src='https://code.jquery.com/jquery-3.2.1.min.js'
         integrity='sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4='
         crossorigin='anonymous')
+  script(src="js/scroll.js")
   script(src="js/particles.min.js")
   script.
     particlesJS.load('particles-js', 'js/particles.json', function() {
