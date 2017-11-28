@@ -4,8 +4,8 @@ var Point = function(x,y){
     this.y = y || 0;
   } else {// Point(e)
     e = x; // e: Event
-    this.x = e.clientX - 9 || 0;
-    this.y = e.clientY - 10 || 0;
+    this.x = e.clientX || 0;
+    this.y = e.clientY || 0;
   }
 }
 Point.prototype.add = function(p){
@@ -13,6 +13,15 @@ Point.prototype.add = function(p){
   var tmpx = this.x + p.x;
   var tmpy = this.y + p.y;
   return new Point(tmpx, tmpy)
+}
+Point.prototype.minus = function(p){
+  var tmpx = this.x - p.x;
+  var tmpy = this.y - p.y;
+  return new Point(tmpx, tmpy)
+}
+
+Point.prototype.multiply = function(scalar){
+  return new Point(scalar*this.x, scalar*this.y);
 }
 
 Point.prototype.toString = function(){

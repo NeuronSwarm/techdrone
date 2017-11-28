@@ -39,6 +39,7 @@ html
     // exposes the client variable
     script(src='/js/bezier/client.js')
     script(src='/js/bezier/touchControls.js')
+    script(src='/js/bezier/DrawMethods.js')
     script.
       var tmpCanvasDraw = function(curve, ctx){
         Clear(ctx);
@@ -50,6 +51,7 @@ html
       }
       var debug = false;
       var canvasState = new CanvasState();
+      canvasState.addPlugin(DrawMethods)
       var client = new Client();
       
       var canvas = document.getElementById('canvas');
@@ -153,12 +155,21 @@ html
       }
       var mouseControls = function(e){
         var cp2 = new Point(e)
-        return bezierDraw(e, cp2)
+        return abstractDraw(DrawMethods.quadraticBezier, cp2)
       }
-      var bezierDraw = function(e, cp2){
+      var abstractDraw = function(method, cp2){
+        var tmp = prepareBezier(cp2)
+        var bezierPoints = method(tmp)
+        return bezierDraw(bezierPoints)
+      }
+      var prepareBezier = function(cp2){
         var start = new Point(myShapes.nextToLast().point.x, myShapes.nextToLast().point.y)
         var end = new Point(myShapes.last().point.x, myShapes.last().point.y)
-        curve = new canvasState.curve(start, null, cp2, end);
+        return {begin: start, cp1: null, cp2: cp2, end: end}
+
+      }
+      var bezierDraw = function(points){
+        var curve = new canvasState.curve(points.begin, points.cp1, points.cp2, points.end);
         canvasState.m_curve = curve;
         tmpCanvasDraw(curve, tmpCTX)
         if(debug)
@@ -195,7 +206,8 @@ html
       }
       stopBezier = function(e){
         $tmpCanvas = $('#tmpCanvas')
-        $tmpCanvas.off('mousemove', bezierDraw);
+        $tmpCanvas.off('mousemove', mouseControls);
+        $tmpCanvas.off('touchmove', MobileControls.onTouchMove);
 
         StopCrosshair()
         canvasState.m_curve.draw(ctx);

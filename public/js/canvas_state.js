@@ -19,9 +19,6 @@ CanvasState = function(){
     var distance = function(vec1, vec2){
       return Math.sqrt(Math.pow(vec1.x - vec2.x, 2) + Math.pow(vec1.y - vec2.y, 2))
     }
-    var multiply = function(scalar, vec){
-      return new Point(scalar*vec.x, scalar*vec.y);
-    }
     this.draw = function(ctx){
       _curve = this;
       ctx.beginPath();
@@ -31,17 +28,16 @@ CanvasState = function(){
                         this.end.x, this.end.y);
       // _tmp = new Point(cp2.x + _state.thickness, cp2.y + _state.thickness);
       mid = _curve.midpoint();
-      //console.log(['start: ' + start.toString(), 'mid: ' + mid.toString(),'end: ' + end.toString()])
-      var scale = distance(mid, this.cp2);
-      console.log(scale)
-      _tmp = mid.add(multiply(_curve.normal(), scale))
-      //console.log(_tmp)
-      ctx.bezierCurveTo(_tmp.x, _tmp.y,
-                        this.cp1.x, this.cp1.y,
-                        this.start.x, this.start.y);
+      //_tmp = mid.add(_curve.normal().multiply(scale))
+      //var outerCurveObj = _t = _state.DrawMethods.quadraticBezier({begin: this.end, mid: _tmp, end: this.start})
+      var _t = {cp1: this.cp2.add(mid.minus(this.cp2).multiply(0.5)), cp2: this.cp1.add(mid.minus(this.cp1).multiply(0.5)), end: this.start}
+      //console.log(outerCurveObj)
+      ctx.bezierCurveTo(_t.cp1.x, _t.cp1.y,
+                        _t.cp2.x, _t.cp2.y,
+                        _t.end.x, _t.end.y);
       ctx.fillStyle = "tomato";
-      ctx.closePath();
       ctx.fill();
+      ctx.closePath();
 
     }
     this.normal = function(){
@@ -121,6 +117,9 @@ CanvasState = function(){
 
 CanvasState.prototype.clear = function(ctx){
   ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+}
+CanvasState.prototype.addPlugin = function(plug){
+  this.DrawMethods = plug;
 }
 
 var CurveFromJSON = function(data){
