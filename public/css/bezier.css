@@ -96,6 +96,9 @@ input[name=canvas_name]{
 }
 .load_menu{
   margin: 20px;
+  overflow-y:scroll;
+  height: 600px;
+  width: 150px;
   z-index: 10;
 }
 .instructions {

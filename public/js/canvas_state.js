@@ -13,7 +13,6 @@ CanvasState = function(){
     this.cp1 = cp1;
     this.cp2 = cp2;
     this.end = end;
-    console.log(cp2)
     _state.tmp = this;
 
     var distance = function(vec1, vec2){
