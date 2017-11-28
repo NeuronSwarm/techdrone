@@ -157,6 +157,10 @@ html
         var cp2 = new Point(e)
         return abstractDraw(DrawMethods.quadraticBezier, cp2)
       }
+      var mobileControls = function(e){
+        var cp2 = MobileControls.onTouchMove(e)
+        return abstractDraw(DrawMethods.quadraticBezier, cp2)
+      }
       var abstractDraw = function(method, cp2){
         var tmp = prepareBezier(cp2)
         var bezierPoints = method(tmp)
@@ -199,7 +203,7 @@ html
 
         console.log('Is Mobile? ' + window.isMobile)
         if(window.isMobile)
-          $tmpCanvas.on('touchmove', MobileControls.onTouchMove);
+          $tmpCanvas.on('touchmove', mobileControls)
         else
           $tmpCanvas.on('mousemove', mouseControls);
         $tmpCanvas.on('mousedown', stopBezier);
@@ -207,7 +211,7 @@ html
       stopBezier = function(e){
         $tmpCanvas = $('#tmpCanvas')
         $tmpCanvas.off('mousemove', mouseControls);
-        $tmpCanvas.off('touchmove', MobileControls.onTouchMove);
+        $tmpCanvas.off('touchmove', mobileControls);
 
         StopCrosshair()
         canvasState.m_curve.draw(ctx);
