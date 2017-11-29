@@ -107,7 +107,7 @@ CanvasState = function(){
   this.load = function(data, ctx){
     _state.curves = [];
     data.canvas_state.forEach(function(curveData){
-      _curve = self.curveFromJSON(curveData)
+      _curve = _state.curveFromJSON(curveData)
       _state.curves.push(_curve)
       _curve.draw(ctx);
     })
