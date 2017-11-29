@@ -35,34 +35,13 @@ Spectator = function () {
     console.log('spectator ' + self.id + ' received message');
     if(self.canvasState){
       canvasState.clear(tmpCTX);
-      curve = CurveFromJSON(json, self.canvasState.curve);
+      curve = canvasState.curveFromSocketJSON(json);
       if(json.permanent)
         curve.draw(self.ctx);
       else
         curve.draw(self.tmpCTX);
     }
 
-    /*
-    if (json.type === 'color') { 
-      myColor = json.data;
-      status.text(myName + ': ').css('color', myColor);
-      input.removeAttr('disabled').focus();
-      // from now user can start sending messages
-    } else if (json.type === 'history') { // entire message history
-      // insert every single message to the chat window
-      for (var i=0; i < json.data.length; i++) {
-      addMessage(json.data[i].author, json.data[i].text,
-          json.data[i].color, new Date(json.data[i].time));
-      }
-    } else if (json.type === 'message') { // it's a single message
-      // let the user write another message
-      input.removeAttr('disabled'); 
-      addMessage(json.data.author, json.data.text,
-                 json.data.color, new Date(json.data.time));
-    } else {
-      console.log('Hmm..., I\'ve never seen JSON like this:', json);
-    }
-    */
   };
   connection.onclose = function(data){
     connection.send(JSON.stringify({type: 'specLeft', id: self.id, data: 'boy bye'}));
@@ -82,9 +61,4 @@ Spectator.prototype.addPlugin = function(plug, ctx, tmpCTX){
   this.canvasState = plug;
   this.ctx = ctx;
   this.tmpCTX = tmpCTX;
-}
-
-var CurveFromJSON = function(data, curve){
-  _curve = data.curve
-  return new curve(_curve.start, _curve.cp1, _curve.cp2, _curve.end);
 }

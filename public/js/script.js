@@ -5,6 +5,7 @@ window.addEventListener('load',function(){
         container=document.querySelector('.social'),
         follow  = document.querySelector('.followUs'),
         social  = document.querySelectorAll('.socialIcon'),
+        // Not using delayed animations anymore
         delay = 0; 
     
     
@@ -17,8 +18,8 @@ window.addEventListener('load',function(){
     setTimeout(
       function(){
         social[0].style.marginTop='0px';
-        social[1].style.marginTop='0px';
-        social[2].style.marginTop='0px';
+        //social[1].style.marginTop='0px';
+        //social[2].style.marginTop='0px';
       },delay*7
     ); 
      

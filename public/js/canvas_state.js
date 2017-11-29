@@ -107,7 +107,7 @@ CanvasState = function(){
   this.load = function(data, ctx){
     _state.curves = [];
     data.canvas_state.forEach(function(curveData){
-      _curve = CurveFromJSON(curveData)
+      _curve = self.curveFromJSON(curveData)
       _state.curves.push(_curve)
       _curve.draw(ctx);
     })
@@ -121,12 +121,22 @@ CanvasState.prototype.addPlugin = function(plug){
   this.DrawMethods = plug;
 }
 
-var CurveFromJSON = function(data){
+CanvasState.prototype.curveFromJSON = function(data){
   _curve = data;
-  start = new Point(_curve.x1,_curve.y1)
-  cp1 = new Point(_curve.x2,_curve.y2)
-  cp2 = new Point(_curve.x3,_curve.y3)
-  end = new Point(_curve.x4,_curve.y4)
+  var
+    start = new Point(_curve.x1,_curve.y1),
+    cp1 = new Point(_curve.x2,_curve.y2),
+    cp2 = new Point(_curve.x3,_curve.y3),
+    end = new Point(_curve.x4,_curve.y4)
   return new canvasState.curve(start, cp1, cp2, end);
+}
 
+CanvasState.prototype.curveFromSocketJSON = function(data){
+  _curve = data.curve
+  var
+    start = new Point(_curve.start.x,_curve.start.y),
+    cp1 = new Point(_curve.cp1.x,_curve.cp1.y),
+    cp2 = new Point(_curve.cp2.x,_curve.cp2.y),
+    end = new Point(_curve.end.x,_curve.end.y)
+  return new canvasState.curve(start, cp1, cp2, end);
 }
