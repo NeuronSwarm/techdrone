@@ -29,6 +29,7 @@ router.post('/coffee/create', function(req, res){
 })
 router.post('/coffee/update', function(req, res){
   CoffeeCups.increment(function(){
+    res.header('Access-Control-Allow-Origin', '*');
     return res.send('coffee incremented');
   })
 })
