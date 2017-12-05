@@ -1,6 +1,9 @@
 express =  require('express');
 
 nodemailer = require('nodemailer');
+Account = require('../models/account.js')
+Session = require('../models/session.js')
+passport = require('passport')
 
 async = require('async');
 forEach = require('async-foreach').forEach;
@@ -27,6 +30,11 @@ router.post('/coffee/create', function(req, res){
     return res.send('saved');
   })
 })
+
+router.get('/coffee/dashboard', function(req, res){
+  return res.render('coffee/dashboard');
+})
+
 router.post('/coffee/update', function(req, res){
   CoffeeCups.increment(function(){
     res.header('Access-Control-Allow-Origin', '*');
@@ -35,7 +43,6 @@ router.post('/coffee/update', function(req, res){
 })
 
 router.get('/coffee/index', function(req, res){
-  console.log('before count')
   CoffeeCups.coffeeCount(function(count, timeDrank){
     return res.send({coffeeCups: count, time: timeDrank });
   })
@@ -136,6 +143,58 @@ router.post('/bezier/save', function(req, res){
     });
   })
 });
+router.get('/login', function(req, res){
+  return res.render('login', {});
+})
+router.post('/login', passport.authenticate('local', {
+  failureFlash: true
+}), function(req, res, next) {
+  Session.findOne({user_id: req.user.id}, function(err, session){
+    if(err)
+      console.error(err);
+    if(!session){
+      console.error('this should never happen')
+    }
+    return session.saveSesh(req.session.id, req.user, res);
+  });
+});
+router.get('/register', function(req, res){
+  return res.render('register', {});
+})
+router.post('/register', function(req, res, next) {
+  username = req.body.username;
+  password = req.body.password;
+  email = req.body.email;
+  console.log(`user: ${username}`);
+  if(!username || !password || !email){
+    req.session.destroy();
+    //res.clearCookie('connect.sid');
+    return res.status(400).send('missing field data').end();
+  }
+    // User by that name already exists
+    // if(user)
+    //   return res.status(400).send(`user by name: ${user.username} already taken`).end();
+
+  return Account.register(new Account({
+    username: username,
+    email: email,
+    created_at: new Date
+  }), req.body.password, function(err, account) {
+    if (err) {
+      return res.status(400).send(err.message);
+    }
+    return passport.authenticate('local')(req, res, function() {
+      // req.session.cookie.maxAge = 3600000;
+      // do not duplicate in db sessions
+      // need to be async
+      console.log('req session: ' + req.session)
+      session = new Session();
+      session.created_at = new Date;
+      session.saveSesh(req.session.id, req.user, res);
+    });
+  });
+});
+
 
 
 module.exports = router

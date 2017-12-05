@@ -1,0 +1,79 @@
+link(href="css/coffee.css", rel='stylesheet')
+body
+    .dashboard
+      header
+        .logo
+          img(src='http://www.iconninja.com/files/301/187/595/atom-icon.png', width='60', height='60')
+        .menu
+          ul
+            li
+              a(href='#!') overview
+              i.icon-down-open
+            li
+              a(href='#!') analitycs
+              i.icon-down-open
+            li
+              a(href='#!') data
+              i.icon-down-open
+            li
+              a(href='#!') alerts
+              i.icon-down-open
+        .user-container
+          ul
+            li.user
+              a(href='https://twitter.com/beverlytanfilm', target='_blank')
+                img.avatar(src='img/bev.jpg')
+            li.user-dropdown
+              i.icon-down-open
+      .container
+        section.filters-container
+          .filters
+            ul
+              li
+                .filters-count
+                  span.title-filter filters
+                  span.count
+                    label 100/
+                    | 1973
+                  button(value='reset') RESET
+                .searcher
+                  input(type='text', placeholder='Text Filter')
+              li.active
+                p
+                  span.title coffee consumer
+                  span.info Beverly Tan
+                i.icon-right-open
+              li.active
+                p
+                  span.title Favorite style
+                  span.info Pumpkin spice latte
+                i.icon-right-open
+              li
+                p
+                  span.title Data Collection Period
+                  span.info.current November 2017
+                i.icon-right-open
+        section.switch-selector
+          .selector
+            ul
+              li
+                span.head-title switch selector
+              li
+                span cups / day
+              li
+                span statistics
+              li
+                span health facts
+        main.data-space
+          .header
+            h2 Coffee Report
+          .charts-container
+            .status-history
+              h2 November             
+            .last-measurements
+              .first
+                canvas#myChartA
+              .second
+                canvas#myChartB
+script(src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.bundle.js')
+script(src='js/coffee-data.js')

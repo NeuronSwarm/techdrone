@@ -1,6 +1,7 @@
 (function() {
   var CoffeeCups, Schema, mongoose, autoIncrement;
 
+  autoIncrement = require('mongoose-auto-increment');
   mongoose = require('mongoose');
   connection = mongoose
     .createConnection("mongodb://localhost/techdrone");
@@ -8,8 +9,8 @@
   
   CoffeeCups = new Schema({
     created_at: Date,
-    updated_at: Date,
-    count: Number
+    count: Number,
+    drinkday_id: Number
   });
   
   
@@ -35,6 +36,7 @@
     })
   }
 
+  CoffeeCups.plugin(autoIncrement.plugin, { model: 'coffeecups', field: 'id' });
   module.exports = mongoose.model('coffeecups', CoffeeCups);
   
 }).call(this);
