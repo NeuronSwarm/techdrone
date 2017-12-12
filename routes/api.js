@@ -38,10 +38,27 @@ router.post('/coffee/update', function(req, res){
   })
 })
 
+// Updated 12/12
+router.get('/coffee/days', function(req, res){
+  DrinkingDays.getLast(req, 10, function(data){
+    // coffeeCups: Array
+    // user: String
+    var params = {
+      coffeeCups: data.counts,
+      user: req.user.username
+    }
+    return res.send(params)
+  })
+})
 router.get('/coffee/index', function(req, res){
   console.log('before count')
-  CoffeeCups.coffeeCount(function(count, timeDrank){
-    return res.send({coffeeCups: count, time: timeDrank });
+  CoffeeCups.coffeeCount(req, res, function(data){
+    var params = {
+      coffeeCups: data.count,
+      updated_at: data.updatedAt,
+      user: req.user.username
+    }
+    return res.send(params);
   })
 })
 

@@ -3,6 +3,8 @@
 
   mongoose = require('mongoose');
   autoIncrement = require('mongoose-auto-increment');
+  DateTools = require('../lib/date_tools');
+
   connection = mongoose
     .createConnection("mongodb://localhost/techdrone");
   Schema = mongoose.Schema;
@@ -24,22 +26,38 @@
       return drinkDay.add(cup, cb);
     })
   }
-  DrinkingDays.statics.upsert = function(user, cb){
-    _drinkDays = this;
-    var cup = new CoffeeCups({created_at: new Date, count: 1})
-    
-    this.find({user_id: user.id}, function(err, drinks){
-      var oneDay = 24*60*60*1000;
-      var daysFromJan = Math.round(((new Date).getTime() - (new Date(2017, 0, 01)).getTime()) / oneDay )
-      m_drink = drinks.map(function(drink){
-        if(drink.day == daysFromJan) return drink
+  DrinkingDays.statics.getLast = function(req, nDays, cb){
+    var today = DateTools.daysFromJan()
+    var days = [];
+    var counts = []
+    for(var i = 0; i < nDays; i++){
+      var newRecord = {day:today-i, count:0}
+      counts.push(newRecord)
+      days.push(today - i)
+    }
+    this.find({user_id: req.user.id, day: days}, function(err, data){
+      if(err) { console.error(err); return cb({error: err}) }
+
+      data.forEach((drinkingDay) => {
+        counts.forEach((record)=>{
+          if(record.day == drinkingDay.day)
+            record.count = drinkingDay.coffeeCount()
+        })
       })
-      m_drink = m_drink[0]
-      if(m_drink){
-        return saveCup(cup, m_drink, cb)
+      cb({counts: counts})
+    })
+  }
+
+  DrinkingDays.statics.upsert = function(user, cb){
+    var cup = new CoffeeCups({created_at: new Date, count: 1})
+    var today = DateTools.daysFromJan()
+
+    this.findOne({user_id: user.id, day: today}, function(err, drink){
+      if(drink){
+        return saveCup(cup, drink, cb)
       }
       else {
-        m_drink = new _drinkDays({day: daysFromJan, user_id: user.id, updated_at: new Date})
+        m_drink = new _drinkDays({day: today, user_id: user.id, updated_at: new Date})
         m_drink.save(function(err){
           if(err) return console.error(err)
           return saveCup(cup, m_drink, cb)
@@ -58,14 +76,9 @@
       cb();
     })
   }
+  // UnNeeded method
   DrinkingDays.methods.coffeeCount = function(cb){
-    CoffeeCups.find({id: this.cup_ids}, function(err, cups){
-      var sum = 0;
-      cups.map(function(cup){
-        sum += cup.count
-      })
-      return cb(sum);
-    })
+    return this.cup_ids.length;
   }
 
   DrinkingDays.plugin(autoIncrement.plugin, { model: 'drinking_days', field: 'id' });

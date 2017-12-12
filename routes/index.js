@@ -13,6 +13,8 @@ const Canvas = require('../models/canvas_state')
 Bezier = require('../models/bezier');
 fs = require('fs');
 path = require('path');
+const http = require('http')
+const axios = require('axios')
 
 router = express.Router();
 
@@ -21,6 +23,17 @@ router.get('/', function(req, res){
   //res.send('Hello World');
 });
 
+router.get('/react-app', function(req, res){
+  axios.get(`http://localhost:3000`)
+    .then((response) => {
+      response.data;
+      console.log(response.data)
+      return res.send(response.data)
+    })
+    .catch((err) => {
+      console.error.bind(err);
+    })
+})
 router.post('/coffee/create', function(req, res){
   c = new CoffeeCups()
   c.created_at = c.updated_at = new Date();
@@ -147,7 +160,7 @@ router.get('/login', function(req, res){
   return res.render('login', {});
 })
 router.post('/login', passport.authenticate('local', {
-  failureFlash: true
+  failureFlash: false
 }), function(req, res, next) {
   Session.findOne({user_id: req.user.id}, function(err, session){
     if(err)
