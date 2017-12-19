@@ -7,6 +7,34 @@ body {
   top: 0;
   left: 0;
 }
+.undo-arrow {
+  position:absolute;
+  top: 16%;
+  left: 20%;
+  width: 10%;
+  height: 10%;
+  font-size: 48px;
+  color: white;
+  z-index: 11;
+  display: none;
+}
+button.undo {
+  background: rgba(0,0,0,0);
+  color: white;
+  border: none;
+}
+button.undo:active i{
+  color: #3e653e;
+}
+button.undo:active, button.undo:focus {
+  color: #208875;
+  border: 0;
+  outline: none;
+}
+.undo-arrow.big-icon {
+  font-size: 48px;
+  color: white
+}
 .save{
   position: absolute;
   top: 55px;

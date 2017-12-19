@@ -1,5 +1,6 @@
 html
   link(href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css", rel='stylesheet', crossorigin="anonymous")
+  link(href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css", rel='stylesheet', crossorigin="anonymous")
   link(href="css/bezier.css", rel='stylesheet')
   body
     .col-md-4
@@ -10,6 +11,9 @@ html
       button.save.UIbtn SAVE
     .saved.onsave-msg Saved!
     .presence-error.onsave-msg Please name your drawing first.
+    .undo-arrow.big-icon
+      button.undo
+        i.fa.fa-rotate-left
     button.load.UIbtn LOAD
     .menu.loadable
       .load_menu
@@ -220,6 +224,11 @@ html
 
         client.send(JSON.stringify(message));
         //Clear(tmpCTX)
+
+        $('.undo-arrow').css('display', 'inline-block')
+        $('.undo-arrow').on('click', (e) => {
+          console.log('Undo Bezier');
+        })
 
         $tmpCanvas.off('mousedown', stopBezier);
         $tmpCanvas.on('mousedown', controller);

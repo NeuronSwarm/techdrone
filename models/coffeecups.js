@@ -25,9 +25,7 @@
     DrinkingDays.findOne(params, function(err, data){
       if(err) { console.error(err); return cb({error: err}) }
       if(!data) return cb({count: 0, updatedAt: '--'})
-      var date = data.updated_at;
-      var lastTime = date.toLocaleDateString() + ' ' + date.toLocaleTimeString()
-      return cb({count: data.coffeeCount(), updatedAt: lastTime});
+      return cb({count: data.coffeeCount(), updatedAt: data.updated_at});
     })
   }
 

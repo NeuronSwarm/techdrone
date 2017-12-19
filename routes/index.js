@@ -15,6 +15,7 @@ fs = require('fs');
 path = require('path');
 const http = require('http')
 const axios = require('axios')
+const accessControl = require('../middleware/access_control')
 
 router = express.Router();
 
@@ -34,32 +35,10 @@ router.get('/react-app', function(req, res){
       console.error.bind(err);
     })
 })
-router.post('/coffee/create', function(req, res){
-  c = new CoffeeCups()
-  c.created_at = c.updated_at = new Date();
-  c.count = 0;
-  c.save(function(err){
-    if(err) console.error(err);
-    return res.send('saved');
-  })
-})
 
-router.get('/coffee/dashboard', function(req, res){
-  return res.render('coffee/dashboard');
-})
-
-router.post('/coffee/update', function(req, res){
-  CoffeeCups.increment(function(){
-    res.header('Access-Control-Allow-Origin', '*');
-    return res.send('coffee incremented');
-  })
-})
-
-router.get('/coffee/index', function(req, res){
-  CoffeeCups.coffeeCount(function(count, timeDrank){
-    return res.send({coffeeCups: count, time: timeDrank });
-  })
-})
+router.get('/widget', function(req, res){
+  return res.render('widget', {});
+});
 
 router.get('/blog/ridicule', function(req, res){
   return res.render('blog/ridicule', {});
@@ -159,7 +138,7 @@ router.post('/bezier/save', function(req, res){
 router.get('/login', function(req, res){
   return res.render('login', {});
 })
-router.post('/login', passport.authenticate('local', {
+router.post('/login', accessControl, passport.authenticate('local', {
   failureFlash: false
 }), function(req, res, next) {
   Session.findOne({user_id: req.user.id}, function(err, session){
@@ -174,7 +153,7 @@ router.post('/login', passport.authenticate('local', {
 router.get('/register', function(req, res){
   return res.render('register', {});
 })
-router.post('/register', function(req, res, next) {
+router.post('/register', accessControl, function(req, res, next) {
   username = req.body.username;
   password = req.body.password;
   email = req.body.email;

@@ -1,0 +1,21 @@
+body(style='background: #222')
+  #coffeeLover
+script(src="http://localhost:8080/oRQdi")
+
+script(src='https://code.jquery.com/jquery-3.2.1.min.js'
+        integrity='sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4='
+        crossorigin='anonymous')
+script.
+  var config = { position: 'right',
+                 background: '#234233' }
+  createCoffeeWidget(config);
+  for(var i = 0; i < 100; i++){
+    var j = i < 50 ? i : 10;
+
+    var el = $(`<div class="rock${i}"></div>`);
+    $('body').append(el);
+    el.css('display', 'inline-block')
+      .css('width', '10%')
+      .css('height', '10%')
+      .css('background', `rgb(${j*5},${j*5},${j*5}`);
+  }

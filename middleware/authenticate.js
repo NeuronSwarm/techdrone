@@ -3,6 +3,8 @@ Session = require('../models/session.js')
 
 var localAuthentication = function(req, res, next){
   console.log('authenticating..');
+  console.log(res.headers);
+
   if(req.url == '/login' || req.url == '/register' || req.url == '/forgot'){
     return next();
   }

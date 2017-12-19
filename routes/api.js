@@ -33,7 +33,6 @@ router.get('/coffee/dashboard', function(req, res){
 
 router.post('/coffee/update', function(req, res){
   DrinkingDays.upsert(req.user, function(){
-    res.header('Access-Control-Allow-Origin', '*');
     return res.send('coffee incremented');
   })
 })
@@ -55,7 +54,7 @@ router.get('/coffee/index', function(req, res){
   CoffeeCups.coffeeCount(req, res, function(data){
     var params = {
       coffeeCups: data.count,
-      updated_at: data.updatedAt,
+      updatedAt: data.updatedAt,
       user: req.user.username
     }
     return res.send(params);

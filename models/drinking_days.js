@@ -49,12 +49,17 @@
   }
 
   DrinkingDays.statics.upsert = function(user, cb){
+    _drinkDays = this
     var cup = new CoffeeCups({created_at: new Date, count: 1})
     var today = DateTools.daysFromJan()
 
     this.findOne({user_id: user.id, day: today}, function(err, drink){
       if(drink){
-        return saveCup(cup, drink, cb)
+        drink.updated_at = new Date()
+        drink.save((err) => {
+          if(err) return console.error(err)
+          return saveCup(cup, drink, cb)
+        })
       }
       else {
         m_drink = new _drinkDays({day: today, user_id: user.id, updated_at: new Date})
