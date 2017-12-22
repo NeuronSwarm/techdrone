@@ -40,9 +40,6 @@ router.get('/widget', function(req, res){
   return res.render('widget', {});
 });
 
-router.get('/blog/ridicule', function(req, res){
-  return res.render('blog/ridicule', {});
-});
 router.get('/blog/terrium', function(req, res){
   return res.render('blog/post', {});
 });

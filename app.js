@@ -92,6 +92,7 @@
   app.use(bodyParser.json()); // support json encoded bodies
   app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
+  console.log(`NODE_ENV: ${app.get('env')}`)
   if (app.get('env') === 'development') {
     app.use(function(err, req, res, next) {
       console.log(err);

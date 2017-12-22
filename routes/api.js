@@ -7,6 +7,7 @@ forEach = require('async-foreach').forEach;
 CoffeeCups = require('../models/coffeecups');
 DrinkingDays = require('../models/drinking_days');
 Bezier = require('../models/bezier');
+DateTools = require('../lib/date_tools');
 fs = require('fs');
 path = require('path');
 
@@ -27,21 +28,33 @@ router.post('/coffee/create', function(req, res){
   })
 })
 
-router.get('/coffee/dashboard', function(req, res){
-  return res.render('coffee/dashboard');
-})
-
 router.post('/coffee/update', function(req, res){
   DrinkingDays.upsert(req.user, function(){
     return res.send('coffee incremented');
   })
 })
 
+// Total Cups drank this year
+router.get('/coffee/year', function(req, res){
+
+  var days = DateTools.daysFromJan((new Date).getFullYear())
+  DrinkingDays.getLast(req, days, function(data){
+    // coffeeCups: Array
+    // user: String
+    var totals = data.counts.reduce((total, record) => {return total + record.count}, 0)
+    var params = {
+      coffeeCups: totals,
+      user: req.user.username
+    }
+    return res.send(params)
+  })
+})
 // Updated 12/12
 router.get('/coffee/days', function(req, res){
   DrinkingDays.getLast(req, 10, function(data){
     // coffeeCups: Array
     // user: String
+
     var params = {
       coffeeCups: data.counts,
       user: req.user.username
