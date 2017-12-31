@@ -112,6 +112,12 @@ CanvasState = function(){
       _curve.draw(ctx);
     })
   }
+  this.render = function(ctx){
+    _state.curves.forEach((curve) => {
+      curve.draw(ctx);
+    })
+
+  }
 }
 
 CanvasState.prototype.clear = function(ctx){

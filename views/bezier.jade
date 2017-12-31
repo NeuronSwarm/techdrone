@@ -212,26 +212,27 @@ html
         $tmpCanvas.on('mousedown', stopBezier);
       }
       stopBezier = function(e){
+        // Event Management
         $tmpCanvas = $('#tmpCanvas')
         $tmpCanvas.off('mousemove', mouseControls);
         $tmpCanvas.off('touchmove', mobileControls);
+        $tmpCanvas.off('mousedown', stopBezier);
+        $tmpCanvas.on('mousedown', controller);
 
+        // UI Management
         StopCrosshair()
         canvasState.m_curve.draw(ctx);
         canvasState.saveNewCurve(ctx);
         var message = canvasState.m_curve.toJSON()
         message.permanent = true;
+        canvasState.clear(tmpCTX);
 
+        // Socket Management
         client.send(JSON.stringify(message));
-        //Clear(tmpCTX)
 
+        // Show undo arrow
         $('.undo-arrow').css('display', 'inline-block')
-        $('.undo-arrow').on('click', (e) => {
-          console.log('Undo Bezier');
-        })
 
-        $tmpCanvas.off('mousedown', stopBezier);
-        $tmpCanvas.on('mousedown', controller);
       }
       DrawAll = function(){
         Clear();
@@ -252,6 +253,13 @@ html
           return check;
         };
         window.isMobile = mobileAndTabletcheck()
+
+        $('.undo-arrow').on('click', (e) => {
+          canvasState.curves.pop();
+          canvasState.clear(ctx);
+          canvasState.render(ctx);
+        })
+
         $tmpCanvas.on('mousedown', controller);
         $('.save').click(function(e){
           e.preventDefault()

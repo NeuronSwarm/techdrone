@@ -40,6 +40,10 @@ router.get('/widget', function(req, res){
   return res.render('widget', {});
 });
 
+router.get('/sandbox', function(req, res){
+  return res.render('sandbox', {});
+});
+
 router.get('/blog/terrium', function(req, res){
   return res.render('blog/post', {});
 });

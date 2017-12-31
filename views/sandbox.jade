@@ -1,0 +1,200 @@
+html
+  link(href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css", rel='stylesheet', crossorigin="anonymous")
+  link(href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css", rel='stylesheet', crossorigin="anonymous")
+  body
+    .col-md-4
+    .col-md-6.title-panel
+      h1  PATTERNS!
+
+  script(src='https://code.jquery.com/jquery-3.2.1.min.js'
+        integrity='sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4='
+        crossorigin='anonymous')
+  // exposes the client variable
+  script.
+    for(var i = 0; i < 100; i++){
+      var j = i < 50 ? i : 10;
+      var h = i > 50 ? (100 - i) : 10;
+
+      var el = $(`<div class="rock${i}"></div>`);
+      $('body').append(el);
+      el.css('display', 'inline-block')
+        .css('width', '10%')
+        .css('height', '10%')
+        .css('background', `rgb(${h*5},${j*5},${j*5}`);
+    }
+    // --------------------------- CodePen  
+    var canvas,ctx,tim,image,mox,moy,isma;
+    window.onload=function(){
+        canvas = document.getElementsByTagName('canvas')[0];
+        ctx = canvas.getContext('2d');
+        canvas.width=window.innerWidth;
+        canvas.height=window.innerHeight;
+        canvas.style.position="absolute";
+        canvas.style.zIndex="-1";
+        
+        image=document.getElementById("haikei");
+        image.src="https://pbs.twimg.com/media/Ci9iT6zUoAAd5OQ.jpg:large";
+        image.style.position="absolute";
+        image.style.zIndex="-2";
+        image.width=window.innerWidth;
+        image.height=window.innerHeight;
+        mox=moy=0;
+        
+        if (navigator.userAgent.indexOf('iPhone') > 0 || 
+            navigator.userAgent.indexOf('iPad') > 0 || 
+            navigator.userAgent.indexOf('iPod') > 0 || 
+                navigator.userAgent.indexOf('Android') > 0) {
+                    canvas.addEventListener('touchstart', loc);
+                    canvas.addEventListener('touchmove', loc);
+                    isma=1;
+                }else{
+                    window.addEventListener('resize',function(){clearTimeout(timer);timer=setTimeout(rsz,200);});
+                    document.addEventListener('mousedown', loc);
+                    document.addEventListener('mousemove', loc);
+                }
+        
+        main();
+    };
+
+    function loc(e){
+        var x,y,sx,sy;   
+        sx=document.body.scrollLeft || document.documentElement.scrollLeft;
+        sy=document.body.scrollTop  || document.documentElement.scrollTop;
+        if(isma){
+            x=e.changedTouches[0].pageX-canvas.offsetLeft;
+            y=e.changedTouches[0].pageY-canvas.offsetTop;
+        }else{
+            x=e.clientX-canvas.offsetLeft+sx;
+            y=e.clientY-canvas.offsetTop+sy;
+        }
+        mox=x;
+        moy=y;
+    }
+
+    function rsz(){
+        canvas.width=window.innerWidth;
+        canvas.height=window.innerHeight;
+        image.width=window.innerWidth;
+        image.height=window.innerHeight;
+    }
+
+    function main(){
+        var a,grd;
+        tim=new Date().getTime()/400;
+        ctx.globalCompositeOperation = "source-over";
+        ctx.fillStyle="rgba(0,0,0,0.5)";
+        grd=ctx.createLinearGradient(0,0,0,canvas.height);
+        a=(tim%360)|0;
+        grd.addColorStop(0,"hsla("+a+",70%,10%,0.3)");
+        grd.addColorStop(0.8,"hsla("+a+",70%,10%,0.9)");
+        ctx.fillStyle=grd;
+        ctx.clearRect(0,0,canvas.width,canvas.height);
+        ctx.fillRect(0,0,canvas.width,canvas.height);
+        motion();
+        requestAnimationFrame(main);
+    }
+
+    function motion(){
+        var a,b,c,d,e,r,p,x,y,x1,y1,len,tx,ty,han,han2,ste,s;
+        ctx.globalCompositeOperation = "lighter";
+        b=(tim|0)%360;
+        ctx.fillStyle="hsla("+b+",90%,70%,0.3)";
+        a=tim/71;
+        b=Math.cos(a*2);
+        c=Math.sin(a*3);
+        s=(canvas.width>canvas.height)?canvas.width:canvas.height;
+        s=s/700;
+        han=(100+Math.sin(tim/53)*20)*s;
+        tx=canvas.width*(0.6+0.1*b);
+        ty=canvas.height*(0.4+0.1*c);
+        ste=0.2+Math.sin(tim/17)*0.25;
+        len=60;
+        han2=200*s;
+        
+        for(d=0;d<18;d++){
+            r=((tim/31+d*ste)%3)-1;
+            p=[];
+            for(a=0;a<len;a++){
+                x=r*canvas.width;
+                y=canvas.height*0.8+Math.sin(r*22+d)*130;
+                b=1+Math.sin(r*37+d)*0.3;
+                x1=Math.cos(-r*7+tim/13+d)*han+tx;
+                y1=Math.sin(-r*7+tim/13+d)*han+ty;
+                b=0.5-Math.cos(r*Math.PI*2)/2;
+                c=1-b;
+                x=x*c+x1*b;
+                y=y*c+y1*b;
+                x1=mox-x;
+                y1=moy-y;
+                if(Math.abs(x1)<han2 && Math.abs(y1)<han2){
+                    b=Math.pow(x1*x1+y1*y1,0.5)/han2;
+                    if(b<1){
+                        b=1-b;
+                        b=0.5-Math.cos(b*Math.PI)/2;
+                        x-=x1*b;
+                        y-=y1*b;
+                    }
+                }
+                p.push([x,y]);
+                r+=0.004;
+            }
+            
+            p1=[];
+            for(a=0;a<len-1;a++){
+                b=p[a];
+                c=p[a+1];
+                x=b[0]-c[0];
+                y=b[1]-c[1];
+                b=Math.atan2(-y,x)+Math.PI/2;
+                x=Math.cos(b);
+                y=Math.sin(b);
+                e=0.5-Math.cos(a/len*Math.PI*2)/2;
+                p1.push([x*e*s,y*e*s]);
+            }
+            for(e=0;e<5;e++){
+                ctx.beginPath();
+                for(a=0;a<len-1;a++){
+                    b=p[a];
+                    c=p1[a];
+                    ctx.lineTo(b[0]+c[0]*(e+0.5),b[1]-c[1]*(e+0.5));
+                }
+                for(a=len-2;a>=0;a--){
+                    b=p[a];
+                    c=p1[a];
+                    ctx.lineTo(b[0]-c[0]*(e+0.5),b[1]+c[1]*(e+0.5));
+                }
+                ctx.fill();
+            }
+        }
+    }
+    window.on('resize', () => {
+      canvas = document.getElementsByTagName('canvas')[0];
+        ctx = canvas.getContext('2d');
+        canvas.width=window.innerWidth;
+        canvas.height=window.innerHeight;
+        canvas.style.position="absolute";
+        canvas.style.zIndex="-1";
+        
+        image=document.getElementById("haikei");
+        image.src="https://pbs.twimg.com/media/Ci9iT6zUoAAd5OQ.jpg:large";
+        image.style.position="absolute";
+        image.style.zIndex="-2";
+        image.width=window.innerWidth;
+        image.height=window.innerHeight;
+        mox=moy=0;
+        
+        if (navigator.userAgent.indexOf('iPhone') > 0 || 
+            navigator.userAgent.indexOf('iPad') > 0 || 
+            navigator.userAgent.indexOf('iPod') > 0 || 
+                navigator.userAgent.indexOf('Android') > 0) {
+                    canvas.addEventListener('touchstart', loc);
+                    canvas.addEventListener('touchmove', loc);
+                    isma=1;
+                }else{
+                    window.addEventListener('resize',function(){clearTimeout(timer);timer=setTimeout(rsz,200);});
+                    document.addEventListener('mousedown', loc);
+                    document.addEventListener('mousemove', loc);
+                }
+        
+        main();
+    });
