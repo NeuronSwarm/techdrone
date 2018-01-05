@@ -12,6 +12,16 @@ path = require('path');
 
 router = express.Router();
 
+const USER_NOT_FOUND = {loggedIn: false, user: null}
+router.get('/status', (req, res, next) => {
+  Session.findOne({ secret: req.headers.my_cookie }, (err, session) => {
+    if(!session) return res.send(USER_NOT_FOUND);
+    Account.findOne({ id: session.user_id }, (err, user) => {
+      if(!user) return res.send(USER_NOT_FOUND);
+      res.send({loggedIn: true, user: user.name, id: user.id})
+    })
+  })
+})
 router.post('/login', passport.authenticate('local', {
   failureFlash: false
 }), function(req, res, next) {

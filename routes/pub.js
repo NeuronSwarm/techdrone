@@ -22,12 +22,12 @@ router.get('/:user_id/days', function(req, res){
     DrinkingDays.getLast(_req, 10, function(data){
       // coffeeCups: Array
       // user: String
-
       var params = {
         coffeeCups: data.counts,
         user: user.username
       }
       return res.send(params)
+      
     })
   })
 })
@@ -45,6 +45,7 @@ router.get('/user/index', (req, res) => {
 router.get('/:user_id/index', function(req, res){
   var _req = {user: { id: req.params.user_id}}
   Account.findOne({id: _req.user.id}, (err, user) => {
+    if(!user) return res.status(400).send("no user")
     CoffeeCups.coffeeCount(_req, res, function(data){
       var params = {
         coffeeCups: data.count,
@@ -60,6 +61,7 @@ router.get('/:user_id/year', function(req, res){
 
   var _req = {user: { id: req.params.user_id}}
   Account.findOne({id: _req.user.id}, (err, user) => {
+    if(!user) return res.status(400).send("no user")
     var days = DateTools.daysFromJan((new Date).getFullYear())
     DrinkingDays.getLast(_req, days, function(data){
       // coffeeCups: Array
