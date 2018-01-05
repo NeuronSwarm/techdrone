@@ -16,6 +16,7 @@ path = require('path');
 const http = require('http')
 const axios = require('axios')
 const accessControl = require('../middleware/access_control')
+const GetNonNamedMap = require('../lib/map_tools')
 
 router = express.Router();
 
@@ -82,6 +83,11 @@ router.get('/nonsense', function(req, res){
 router.get('/bezier', function(req, res){
   res.render('bezier', {});
 });
+
+router.get('/bezier/:name', function(req, res){
+  res.render('bezier', {});
+});
+
 router.get('/watch', function(req, res){
   res.render('watch', {});
 });
@@ -97,6 +103,18 @@ router.get('/canvas/index', function(req, res){
     res.send({list: _states});
   })
 })
+router.get('/bezier/name/:name', function(req, res){
+  Canvas.findOne({name: req.params.name}, function(err, _state){
+    if(err)
+      console.error(err);
+    if(!_state) return GetNonNamedMap((curves) => {
+      res.send({canvas_state: curves});
+    });
+    _state.getCurves(function(curves){
+      res.send({canvas_state: curves});
+    })
+  })
+});
 router.get('/bezier/load/:id', function(req, res){
   Canvas.findOne({id: req.params.id}, function(err, _state){
     if(err)
