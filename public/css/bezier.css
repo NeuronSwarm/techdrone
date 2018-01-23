@@ -137,6 +137,27 @@ input[name=canvas_name]{
   width: 150px;
   z-index: 10;
 }
+::-webkit-scrollbar-track
+{
+	box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	border-radius: 20px;
+	background-color: #F5F5F5;
+}
+
+::-webkit-scrollbar
+{
+	width: 12px;
+	background-color: #222;
+}
+
+::-webkit-scrollbar-thumb
+{
+  border-radius: 10px;
+  border: 1px #50b3b0 solid;
+	box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+	background-color: #445558;
+}
+
 .instructions {
   display: none;
   position: absolute;
@@ -155,7 +176,7 @@ input[name=canvas_name]{
 .menu {
   display: none;
   position: absolute;
-  top: 35%;
+  top: 38%;
   left: 10px;
   width: 60px;
   height: 30px;
@@ -195,9 +216,11 @@ input[name=canvas_name]{
 }
 .tool:hover .bg {
   background: rgba(22,33,22,0.5); 
+  cursor: pointer;
 }
 .collapser:hover .bg {
   background: rgba(22,33,22,0.5); 
+  cursor: pointer;
 }
 .tool.disk {
   background: url('../img/UI/disk.png');

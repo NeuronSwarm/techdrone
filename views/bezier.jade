@@ -24,7 +24,7 @@ html
       .save-container
         form
           .canvas_name
-            input(placeholder='name' type='text' name='canvas_name' required)
+            input(placeholder='canvas name' type='text' name='canvas_name' required maxlength="12")
           button.save.UIbtn SAVE
         .saved.onsave-msg Saved!
         .presence-error.onsave-msg Please name your drawing first.
@@ -324,6 +324,7 @@ html
             success: function(){
               $(".saved").show();
               $(".saved").delay(2000).fadeOut(1000); 
+              window.history.pushState({},"", '/bezier/' + _name);
             }
           })
         });
@@ -350,6 +351,7 @@ html
                       Clear(ctx);
                       Clear(tmpCTX);
                       canvasState.load(data, ctx);
+                      window.history.pushState({},"", '/bezier/' + _canvas.name);
                     }
                   })
                 })
@@ -368,5 +370,5 @@ html
           setCanvasSize(canvas);
           setLeftPanel();
         })
-        $('.load_menu').css('height', 0.6 * innerHeight +'px' );
+        $('.load_menu').css('height', 0.45 * innerHeight +'px' );
       });
