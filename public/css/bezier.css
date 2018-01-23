@@ -1,6 +1,16 @@
 body {
   color: white;
 }
+.tool-explain {
+  position: absolute;
+  top: 70px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+.save-container {
+  position: absolute;
+  top: 100px;
+}
 #canvas {
   background: #222;
   position: absolute;
@@ -128,6 +138,13 @@ input[name=canvas_name]{
   z-index: 10;
 }
 .instructions {
+  display: none;
+  position: absolute;
+  bottom: 33%;
+  left: 10px;
+  width: 60px;
+  height: 30px;
+  z-index: 10;
   color: white;
 }
 .instructions li {
@@ -137,13 +154,105 @@ input[name=canvas_name]{
 }
 .menu {
   display: none;
-}
-.loadable{
   position: absolute;
-  top: 120px;
+  top: 35%;
   left: 10px;
-  width: 100px;
-  height: 200px;
+  width: 60px;
+  height: 30px;
+  z-index: 10;
+
+}
+#left-panel {
+  position:absolute;
+  top: 0;
+  left: 0;
+  width: 201px;
+  /* height determined by javascript setLeftPanel */
+  border-right: 1px #4eafad solid;
+  box-shadow: 2px 2px 5px #4eafad;
+  z-index: 3;
+  background: #222;
+}
+.toolbar-container {
+  position:absolute;
+  top: 0 ;
+  z-index: 10;
+}
+.toolbar-container ul {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  box-shadow: 0px 2px 5px #4eafad;
+}
+.tool {
+  width: 50px;
+  height: 50px;
+  display: inline-block;
+  z-index: 10;
+}
+.tool .bg {
+  border: 1px #4eafad solid;
+}
+.tool:hover .bg {
+  background: rgba(22,33,22,0.5); 
+}
+.collapser:hover .bg {
+  background: rgba(22,33,22,0.5); 
+}
+.tool.disk {
+  background: url('../img/UI/disk.png');
+  background-position: 0 30%;
+  background-size: 100% 80%;
+  background-repeat: no-repeat;
+}
+.tool.undo {
+  background: url('../img/UI/undo.png');
+  background-size: 100% 100%
+}
+.tool.redo {
+  background: url('../img/UI/redo.png');
+  background-size: 100% 100%
+}
+.tool.color {
+  background: url('../img/UI/color_tomato.png');
+  background-size: 100% 100%
+}
+.collapser {
+  padding: 5px;
+  width: 30px;
+  height: 30px;
+  z-index: 2;
+}
+.collapser.left {
+  position: absolute;
+  top: 50%;
+  right: 0;
+}
+.collapser.right {
+  position: absolute;
+  top: 50%;
+  left: 0;
+}
+
+.collapser .inner {
+  width: 100%;
+  height: 100%;
+}
+.left.collapser .inner {
+  background: url('../img/UI/left_arrow.png');
+  background-size: 100% 100%;
+}
+.right.collapser .inner {
+  background: url('../img/UI/right_arrow.png');
+  background-size: 100% 100%;
+}
+.bg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.loadable{
   z-index: 10;
 }
 .coordinate-log {

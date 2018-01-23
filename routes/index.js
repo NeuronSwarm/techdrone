@@ -205,6 +205,18 @@ router.post('/register', accessControl, function(req, res, next) {
     });
   });
 });
+router.get('/bigdata', (req, res) => {
+  fs.readFile('/Users/tyconnors/Downloads/durham-police-crime-reports.json', 'utf8', (err, file) => {
+    var json = JSON.parse(file);
+    console.log(json.length)
+    var charges = json.filter((report) => {
+      if(report.chrgdesc.match(/marijuana/i))
+        return report
+    })
+    console.log(charges.length)
+    res.send(charges)
+  })
+})
 
 
 

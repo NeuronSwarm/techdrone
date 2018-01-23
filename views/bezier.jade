@@ -5,25 +5,48 @@ html
   body
     .col-md-4
     .col-md-6.title-panel
-    form
-      .canvas_name
-        input(placeholder='name' type='text' name='canvas_name' required)
-      button.save.UIbtn SAVE
-    .saved.onsave-msg Saved!
-    .presence-error.onsave-msg Please name your drawing first.
-    .undo-arrow.big-icon
-      button.undo
-        i.fa.fa-rotate-left
-    button.load.UIbtn LOAD
-    .menu.loadable
-      .load_menu
-    .instructions.loadable
-      h2 HINT
-      li Click to create endpoint
-      li Move & repeat
-      li Move & observe
-      li Click to finish
-      li Repeat & have fun
+    .toolbar-container
+      ul
+        li.tool.disk 
+          span.hover
+          span.bg
+        li.tool.undo
+          span.hover
+          span.bg
+        li.tool.redo
+          span.hover
+          span.bg
+        li.tool.color
+          span.hover
+          span.bg
+    #left-panel
+      .tool-explain
+      .save-container
+        form
+          .canvas_name
+            input(placeholder='name' type='text' name='canvas_name' required)
+          button.save.UIbtn SAVE
+        .saved.onsave-msg Saved!
+        .presence-error.onsave-msg Please name your drawing first.
+        .undo-arrow.big-icon
+          button.undo
+            i.fa.fa-rotate-left
+        button.load.UIbtn LOAD
+      .menu.loadable
+        .load_menu
+      .left.collapser
+        .inner
+          span.bg
+      .instructions.loadable
+        h2 HINT
+        li Click to create endpoint
+        li Move & repeat
+        li Move & observe
+        li Click to finish
+        li Repeat & have fun
+    .right.collapser
+      .inner
+        span.bg
 
     .viewers
       h3 Spectating
@@ -43,10 +66,19 @@ html
     script(src='/js/bezier/client.js')
     script(src='/js/bezier/touchControls.js')
     script(src='/js/bezier/drawMethods.js')
+    script(src='/js/bezier/toolbar.js')
     script.
       var tmpCanvasDraw = function(curve, ctx){
         Clear(ctx);
         curve.draw(ctx);
+      }
+      var setLeftPanel = () => {
+        $('#left-panel').height(innerHeight)
+      }
+      var setInstructions = () => {
+        setTimeout(() => {
+          $('.instructions').css('display', 'block')
+        }, 100)
       }
       var setCanvasSize = function(canvas){
         canvas.width = window.innerWidth
@@ -230,9 +262,6 @@ html
         // Socket Management
         client.send(JSON.stringify(message));
 
-        // Show undo arrow
-        $('.undo-arrow').css('display', 'inline-block')
-
       }
       DrawAll = function(){
         Clear();
@@ -258,8 +287,12 @@ html
           }
         })
       }
+      // /bezier/canvas_name
+      // /bezier
+      const url = "/bezier"
+      const URL_LENGTH = url.length
       $(document).ready(function() {
-        if(location.pathname.length > 8){
+        if(location.pathname.length > URL_LENGTH){
           var namedCanvas = location.pathname.substring(8, location.pathname.length)
           loadCanvas(namedCanvas)
         }
@@ -269,12 +302,10 @@ html
           return check;
         };
         window.isMobile = mobileAndTabletcheck()
+        // startup maintenance
+        setLeftPanel();
+        setInstructions();
 
-        $('.undo-arrow').on('click', (e) => {
-          canvasState.curves.pop();
-          canvasState.clear(ctx);
-          canvasState.render(ctx);
-        })
 
         $tmpCanvas.on('mousedown', controller);
         $('.save').click(function(e){
@@ -335,6 +366,7 @@ html
         $(window).on('resize', function(e){
           setCanvasSize(tmpCanvas);
           setCanvasSize(canvas);
+          setLeftPanel();
         })
         $('.load_menu').css('height', 0.6 * innerHeight +'px' );
       });
