@@ -6,6 +6,7 @@ async = require('async');
 forEach = require('async-foreach').forEach;
 CoffeeCups = require('../models/coffeecups');
 DrinkingDays = require('../models/drinking_days');
+Canvas = require('../models/canvas_state');
 Bezier = require('../models/bezier');
 DateTools = require('../lib/date_tools');
 fs = require('fs');
@@ -18,6 +19,14 @@ router.get('/', function(req, res){
   //res.send('Hello World');
 });
 
+router.delete('/curve/:name', (req, res) => {
+  Canvas.remove({ name: req.params.name }, (err, _) => {
+    if(err) res.send(err)
+    res.json({
+      message: `deleted ${ req.params.name}`
+    })
+  })
+})
 router.post('/coffee/create', function(req, res){
   c = new CoffeeCups()
   c.created_at = c.updated_at = new Date();
