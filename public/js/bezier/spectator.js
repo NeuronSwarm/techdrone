@@ -6,7 +6,7 @@ Spectator = function () {
 
   var connection;
   if(location.host == 'techdrone.us')
-    connection = new WebSocket('wss://127.0.0.1');
+    connection = new WebSocket('wss://techdrone.us');
   else
     connection = new WebSocket('ws://127.0.0.1:8080');
 

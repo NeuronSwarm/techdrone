@@ -146,5 +146,6 @@ CanvasState.prototype.curveFromSocketJSON = function(data){
     cp1 = new Point(_curve.cp1.x,_curve.cp1.y),
     cp2 = new Point(_curve.cp2.x,_curve.cp2.y),
     end = new Point(_curve.end.x,_curve.end.y)
-  return new canvasState.curve(start, cp1, cp2, end);
+    color = _curve.color
+  return new canvasState.curve(start, cp1, cp2, end, color);
 }
