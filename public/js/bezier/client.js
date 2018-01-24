@@ -4,7 +4,11 @@ var Client = function () {
   console.log('setting websockets');
   window.WebSocket = window.WebSocket || window.MozWebSocket;
 
-  var connection = new WebSocket('ws://127.0.0.1:8080');
+  var connection;
+  if(location.host == 'techdrone.us')
+    connection = new WebSocket('wss://127.0.0.1');
+  else
+    connection = new WebSocket('ws://127.0.0.1:8080');
   self.connection = connection;
 
   connection.onopen = function () {
