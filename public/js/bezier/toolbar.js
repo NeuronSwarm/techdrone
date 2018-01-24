@@ -10,6 +10,8 @@ $(document).ready(() => {
 
   $('.tool.disk').on('click', (e) => {
     $('#left-panel').show() 
+    $('.hex-container').hide()
+    $('.save-container').show()
   })
 
   var tmpState = { curves: []}
@@ -30,7 +32,13 @@ $(document).ready(() => {
   })
 
   $('.tool.color').on('click', (e) => {
-    $('.tool-explain').text('Hex color picker coming soon..').show()
+    $('#left-panel').show() 
+    $('.save-container').hide()
+    $('.hex-container').show()
+    $('#myColorPicker').val(ColorTool.color).submit()
+    $('#myColorPicker').focus()
+    var _e = jQuery.Event("change");
+    $("#myColorPicker").trigger(_e);
   })
 
   // hover events

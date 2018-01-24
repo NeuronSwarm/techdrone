@@ -7,7 +7,11 @@ body {
   padding-left: 10px;
   padding-right: 10px;
 }
-.save-container {
+.hex-container {
+  display: none;
+  width: 200px;
+}
+.save-container, .hex-container{
   position: absolute;
   top: 100px;
 }
@@ -88,7 +92,7 @@ button.undo:active, button.undo:focus {
 ::-moz-placeholder { /* Firefox 19+ */
   color: lightgrey;
 }
-.canvas_name {
+.canvas_name, #myColorPicker {
 
   border-radius: 8px;
   background: url('../img/UI/input1.png');
@@ -102,11 +106,11 @@ button.undo:active, button.undo:focus {
   padding-left: 15px;
   z-index:100;
 }
-input[name=canvas_name]:active, input[name=canvas_name]:focus {
+input:active, input:focus {
   border-width: none;
   outline:0;
 }
-input[name=canvas_name]{
+input[type=text]{
   background: rgba(0,0,0,0);
   width: 165px;
   height: 30px;
@@ -236,10 +240,12 @@ input[name=canvas_name]{
   background: url('../img/UI/redo.png');
   background-size: 100% 100%
 }
-.tool.color {
-  background: url('../img/UI/color_tomato.png');
-  background-size: 100% 100%
+#picker {
+  display: block;
+  width: 100%;
+  height: 100%;
 }
+
 .collapser {
   padding: 5px;
   width: 30px;
