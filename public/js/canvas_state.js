@@ -5,7 +5,7 @@ CanvasState = function(){
   var _state = this;
 
 
-  this.curve = function(start, cp1, cp2, end){
+  this.curve = function(start, cp1, cp2, end, color){
     if(cp1 == null)
       cp1 = cp2;
 
@@ -13,6 +13,7 @@ CanvasState = function(){
     this.cp1 = cp1;
     this.cp2 = cp2;
     this.end = end;
+    this.color = color
     _state.tmp = this;
 
     var distance = function(vec1, vec2){
@@ -34,7 +35,7 @@ CanvasState = function(){
       ctx.bezierCurveTo(_t.cp1.x, _t.cp1.y,
                         _t.cp2.x, _t.cp2.y,
                         _t.end.x, _t.end.y);
-      ctx.fillStyle = "tomato";
+      ctx.fillStyle = this.color || ColorTool.color;
       ctx.fill();
       ctx.closePath();
 
@@ -85,7 +86,8 @@ CanvasState = function(){
           end: {
             x: _curve.end.x,
             y: _curve.end.y
-          }
+          },
+          color: _curve.color
         }
       }
     }
@@ -100,7 +102,6 @@ CanvasState = function(){
   }
   // save the latest curve
   this.saveNewCurve = function(ctx){
-    console.log(_state.tmp.cp2)
     // _state.tmp.draw(ctx);
     _state.curves.push(_state.tmp);
   }
@@ -133,8 +134,9 @@ CanvasState.prototype.curveFromJSON = function(data){
     start = new Point(_curve.x1,_curve.y1),
     cp1 = new Point(_curve.x2,_curve.y2),
     cp2 = new Point(_curve.x3,_curve.y3),
-    end = new Point(_curve.x4,_curve.y4)
-  return new canvasState.curve(start, cp1, cp2, end);
+    end = new Point(_curve.x4,_curve.y4),
+    color = _curve.color
+  return new canvasState.curve(start, cp1, cp2, end, color);
 }
 
 CanvasState.prototype.curveFromSocketJSON = function(data){

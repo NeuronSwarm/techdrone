@@ -1,8 +1,8 @@
 html
   link(href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css", rel='stylesheet', crossorigin="anonymous")
   link(href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css", rel='stylesheet', crossorigin="anonymous")
-  link(href="/colorpicker/css/bootstrap-colorpicker.min.css", rel='stylesheet')
   link(href="/css/bezier.css", rel='stylesheet')
+  link(href="/colorpicker/css/bootstrap-colorpicker.min.css", rel='stylesheet')
   body
     .col-md-4
     .col-md-6.title-panel
@@ -68,7 +68,7 @@ html
     script(src='/js/bezier/drawMethods.js')
     script(src='/js/bezier/colorpicker.js')
     script(src='/js/bezier/toolbar.js')
-    script(src='colorpicker/js/bootstrap-colorpicker.min.js')
+    script(src='/colorpicker/js/bootstrap-colorpicker.min.js')
     script.
       var tmpCanvasDraw = function(curve, ctx){
         Clear(ctx);
@@ -210,7 +210,7 @@ html
 
       }
       var bezierDraw = function(points){
-        var curve = new canvasState.curve(points.begin, points.cp1, points.cp2, points.end);
+        var curve = new canvasState.curve(points.begin, points.cp1, points.cp2, points.end, ColorTool.color);
         canvasState.m_curve = curve;
         tmpCanvasDraw(curve, tmpCTX)
         if(debug)
@@ -220,7 +220,6 @@ html
       }
       // create tmp canvas based on two endpoints: first and last
       var startPoint = function(e){
-        console.log('start')
         bezierStartPoint = new Point(e)
         circle = new Shape(bezierStartPoint, radius)
         //- circle.draw();
@@ -228,7 +227,6 @@ html
         myShapes.push(circle);
       }
       var endPoint = function(e){
-        console.log('end')
         bezierEndPoint = new Point(e)
         circle = new Shape(bezierEndPoint, radius)
         //circle.draw();
@@ -238,7 +236,6 @@ html
 
         $tmpCanvas.off('mousedown', controller);
 
-        console.log('Is Mobile? ' + window.isMobile)
         if(window.isMobile)
           $tmpCanvas.on('touchmove', mobileControls)
         else

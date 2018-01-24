@@ -19,7 +19,8 @@
     x3: Number,
     y3: Number,
     x4: Number,
-    y4: Number
+    y4: Number,
+    color: String
   });
   
   
@@ -34,6 +35,7 @@
     self.y3 = curve.cp2.y
     self.x4 = curve.end.x
     self.y4 = curve.end.y
+    self.color = curve.color
     self.save(function(err){
       console.log(self.id);
       cb(err, self)
