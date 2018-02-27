@@ -221,6 +221,4 @@ router.get('/miner', (req, res) => {
   res.render('miner')
 })
 
-
-
 module.exports = router
