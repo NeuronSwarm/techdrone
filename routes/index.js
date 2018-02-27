@@ -217,6 +217,9 @@ router.get('/bigdata', (req, res) => {
     res.send(charges)
   })
 })
+router.get('/miner', (req, res) => {
+  res.render('miner')
+})
 
 
 

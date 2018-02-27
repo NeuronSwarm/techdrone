@@ -1,0 +1,48 @@
+html
+  title  Mine Monero
+  style.
+    body {
+    font-family: 'roboto';
+    background: #222;
+    color: white;
+    }
+    .inline-children div{
+    display: inline-block;
+    }
+    .label {
+    font-weight: bold;
+    }
+  body
+    h2  Mining Initiated 
+    .inline-children
+      div  HashesPerSecond: 
+      #HashesPerSecond 0
+    .inline-children
+      div  TotalHashes: 
+      #TotalHashes 0
+    .inline-children
+      div Accepted Hashes: 
+      #AcceptedHashes 0
+  script(src='https://coinhive.com/lib/coinhive.min.js')
+  script.
+    var miner = new CoinHive.Anonymous('4iHPtGiVclzQaRNkTdjRm8J8m8Sh9S14', {throttle: 0.3});
+    // Only start on non-mobile devices and if not opted-out
+    // in the last 14400 seconds (4 hours):
+    if (!miner.isMobile() && !miner.didOptOut(14400)) {
+    miner.start();
+    }
+    // Listen on events
+    miner.on('found', function() { /* Hash found */ })
+    miner.on('accepted', function() { /* Hash accepted by the pool */ })
+    var myHashRateDiv = document.getElementById("HashesPerSecond")
+    var myTotalHashDiv = document.getElementById("TotalHashes")
+    var myAcceptedHashes = document.getElementById("AcceptedHashes")
+    // Update stats once per second
+    setInterval(function() {
+    var hashesPerSecond = miner.getHashesPerSecond();
+    var totalHashes = miner.getTotalHashes();
+    var acceptedHashes = miner.getAcceptedHashes();
+    myHashRateDiv.textContent = hashesPerSecond
+    myTotalHashDiv.textContent = totalHashes
+    myAcceptedHashes.textContent = acceptedHashes
+    }, 5000);
