@@ -10,6 +10,7 @@
       ctx.beginPath();
       ctx.arc(m_canvas.width / 2, m_canvas.height / 2, 10, 0, Math.PI*2);
       ctx.fillStyle = color;
+      ctx.strokeStyle = color;
       ctx.fill()
       ctx.closePath();
     }

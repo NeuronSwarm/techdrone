@@ -322,10 +322,11 @@ input[type=text]{
 }
 .title-panel {
   position: relative;
-  background: url('../img/titleBG1.png');
+  background: url('../img/pegasus_editor2.png');
   background-size: 100%;
   background-repeat: no-repeat;
-  height: 80px;
+  margin-top: -10px;
+  height: 135px;
   z-index: 11;
   text-align: center;
   display: inline-block; 
