@@ -25,7 +25,7 @@
     "express-session": "^1.15.6",
     "github-oauth": "^0.2.2",
     "jade": "^1.11.0",
-    "mongoose": "4.10.8",
+    "mongoose": "5.13.20",
     "mongoose-auto-increment": "^5.0.1",
     "morgan": "^1.8.2",
     "nodemailer": "^4.1.0",
